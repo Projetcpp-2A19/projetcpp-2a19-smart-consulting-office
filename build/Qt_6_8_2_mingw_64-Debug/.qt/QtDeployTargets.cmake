@@ -1,0 +1,3 @@
+set(__QT_DEPLOY_TARGET_ProjetAmen_FILE C:/Users/PC/Desktop/Projet amen Qt/TestPourOuseema/ProjetAmen/build/Qt_6_8_2_mingw_64-Debug/ProjetAmen.exe)
+set(__QT_DEPLOY_TARGET_ProjetAmen_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_ProjetAmen_RUNTIME_DLLS C:/Users/PC/Desktop/6.8.2/mingw_64/bin/Qt6PrintSupport.dll;C:/Users/PC/Desktop/6.8.2/mingw_64/bin/Qt6Network.dll;C:/Users/PC/Desktop/6.8.2/mingw_64/bin/Qt6Sql.dll;C:/Users/PC/Desktop/6.8.2/mingw_64/bin/Qt6Charts.dll;C:/Users/PC/Desktop/6.8.2/mingw_64/bin/Qt6OpenGLWidgets.dll;C:/Users/PC/Desktop/6.8.2/mingw_64/bin/Qt6Widgets.dll;C:/Users/PC/Desktop/6.8.2/mingw_64/bin/Qt6OpenGL.dll;C:/Users/PC/Desktop/6.8.2/mingw_64/bin/Qt6Gui.dll;C:/Users/PC/Desktop/6.8.2/mingw_64/bin/Qt6Core.dll)
