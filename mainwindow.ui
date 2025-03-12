@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1290</width>
+    <height>711</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gestion des Clients</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>1241</width>
+      <height>571</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTabWidget::pane {
+    border: 2px solid #3498db; /* Bordure autour du widget */
+    background: white;
+    border-radius: 5px;
+}
+
+QTabBar::tab {
+    background: #ecf0f1; /* Fond gris clair */
+    border: 2px solid #bdc3c7;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #2c3e50; /* Gris foncé */
+}
+
+QTabBar::tab:selected {
+    background: #3498db; /* Bleu pour l'onglet actif */
+    color: white;
+    border: 2px solid #2980b9;
+}
+
+QTabBar::tab:hover {
+    background: #5dade2; /* Bleu clair au survol */
+}
+</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="Projects">
+     <attribute name="title">
+      <string>Tab 1</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>291</width>
+        <height>481</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox {
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 5px 10px;
+    color: #3498db;
+}
+</string>
+      </property>
+      <property name="title">
+       <string>Add Project</string>
+      </property>
+      <widget class="QPushButton" name="addButton">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>440</y>
+         <width>121</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:pressed {
+    background-color: #1c5985;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>add</string>
+       </property>
+      </widget>
+      <widget class="QDateEdit" name="dateDebutEdit">
+       <property name="geometry">
+        <rect>
+         <x>138</x>
+         <y>343</y>
+         <width>121</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QDateEdit {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+QDateEdit::drop-down {
+    border: none;
+}
+</string>
+       </property>
+      </widget>
+      <widget class="QDateEdit" name="dateFinEdit">
+       <property name="geometry">
+        <rect>
+         <x>122</x>
+         <y>383</y>
+         <width>121</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QDateEdit {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+QDateEdit::drop-down {
+    border: none;
+}
+
+</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>21</x>
+         <y>343</y>
+         <width>111</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50; /* Gris foncé */
+    padding: 3px;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Start date :</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>21</x>
+         <y>383</y>
+         <width>95</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50; /* Gris foncé */
+    padding: 3px;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>End date :</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>23</x>
+         <y>41</y>
+         <width>251</width>
+         <height>261</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50; /* Gris foncé */
+    padding: 3px;
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Name of the project :</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="nomLineEdit">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+QLineEdit:focus {
+    border: 2px solid #3498db;
+    background-color: white;
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_7">
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50; /* Gris foncé */
+    padding: 3px;
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Budget :</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="budgetLineEdit">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+QLineEdit:focus {
+    border: 2px solid #3498db;
+    background-color: white;
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_8">
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50; /* Gris foncé */
+    padding: 3px;
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Description :</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="descLineEdit">
+          <property name="styleSheet">
+           <string notr="true">QTextEdit:focus {
+    border: 2px solid #3498db;
+    background-color: white;
+}
+
+
+QTextEdit {
+    background-color: #1e1e1e;  /* Fond noir */
+    color: #ffffff;  /* Texte blanc */
+    border: 1px solid #333333;  /* Bordure grise */
+
+    selection-background-color: #444444; /* Couleur de sélection */
+}
+QTextEdit {
+    background-color: #ffffff;
+    color: #222222;
+    font-size: 14px;
+    border: 2px solid #aaaaaa;
+
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Ombre */
+
+}
+</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>21</x>
+         <y>310</y>
+         <width>162</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50; /* Gris foncé */
+    padding: 3px;
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Priority :</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="prioriteComboBox">
+          <item>
+           <property name="text">
+            <string>Low</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Medium</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>High</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_pic">
+      <property name="geometry">
+       <rect>
+        <x>1130</x>
+        <y>-20</y>
+        <width>111</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>30</y>
+        <width>801</width>
+        <height>481</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox {
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 5px 10px;
+    color: #3498db;
+}
+</string>
+      </property>
+      <property name="title">
+       <string>Projects</string>
+      </property>
+      <widget class="QTableView" name="tableView">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>120</y>
+         <width>611</width>
+         <height>231</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTableView {
+    background-color: #f0f0f0;
+    border: 1px solid #dcdcdc;
+    font-size: 12px;
+    color: #333;
+    selection-background-color: #A3C1D1;
+    selection-color: white;
+}
+
+QTableView::item {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+QTableView::header {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+</string>
+       </property>
+      </widget>
+      <widget class="QSplitter" name="splitter_5">
+       <property name="geometry">
+        <rect>
+         <x>660</x>
+         <y>140</y>
+         <width>133</width>
+         <height>105</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <widget class="QPushButton" name="modifyButton">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:pressed {
+    background-color: #1c5985;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>modify project</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:pressed {
+    background-color: #1c5985;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Export to PDF</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="deleteButton">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:pressed {
+    background-color: #1c5985;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>delete project</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="label_14">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>360</y>
+         <width>181</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50; /* Gris foncé */
+    padding: 3px;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Statics of the project</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="verticalLayoutWidget_3">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>360</y>
+         <width>431</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout"/>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_5">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>44</y>
+         <width>114</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+QLineEdit:focus {
+    border: 2px solid #3498db;
+    background-color: white;
+}
+</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>44</y>
+         <width>94</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50; /* Gris foncé */
+    padding: 3px;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Search :</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>80</y>
+         <width>71</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50; /* Gris foncé */
+    padding: 3px;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Priority :</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="comboBox_4">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>80</y>
+         <width>80</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:pressed {
+    background-color: #1c5985;
+}
+</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>haute</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>moyenne</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>basse</string>
+        </property>
+       </item>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1290</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
