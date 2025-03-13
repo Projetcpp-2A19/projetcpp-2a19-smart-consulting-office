@@ -1,0 +1,178 @@
+/* --- Global Styles --- */
+QWidget {
+    background-color: rgba(0, 0, 0, 150);
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+
+/* --- Labels --- */
+QLabel {
+    font-size: 16px;
+    color: white; /* Changed to white for better contrast */
+    background-color: transparent;
+    font-weight: 500; /* Slightly bold for better readability */
+}
+
+/* --- Input Fields (QLineEdit, QTextEdit) --- */
+QLineEdit, QTextEdit {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #8A2BE2;
+    border-radius: 8px; /* Slightly larger radius for a softer look */
+    padding: 8px;
+    color: white;
+    font-size: 14px;
+    selection-background-color: #A020F0; /* Highlight color for selected text */
+    selection-color: white;
+}
+
+QLineEdit:focus, QTextEdit:focus {
+    border-color: #A020F0;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* --- Buttons (QPushButton) --- */
+QPushButton {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #8A2BE2, stop:1 #4B0082);
+    border: 2px solid #8A2BE2;
+    border-radius: 8px;
+    padding: 10px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 80px; /* Ensure buttons have a minimum width */
+}
+
+QPushButton:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #A020F0, stop:1 #8A2BE2);
+    border-color: #A020F0;
+}
+
+QPushButton:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #4B0082, stop:1 #8A2BE2);
+    border-color: #4B0082;
+}
+
+/* --- Tables (QTableWidget) --- */
+QTableWidget {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid #8A2BE2;
+    color: white;
+    gridline-color: #8A2BE2;
+    selection-background-color: rgba(138, 43, 226, 0.5);
+    font-size: 14px;
+}
+
+QHeaderView::section {
+    background-color: #8A2BE2;
+    color: white;
+    padding: 8px;
+    border: 1px solid #4B0082;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+QTableWidget::item {
+    padding: 6px;
+}
+
+QTableWidget::item:selected {
+    background-color: #A020F0;
+    color: white;
+}
+
+/* --- ComboBox (QComboBox) --- */
+QComboBox {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #8A2BE2;
+    border-radius: 8px;
+    padding: 6px;
+    color: white;
+    font-size: 14px;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 24px;
+    border-left: 1px solid #8A2BE2;
+}
+
+QComboBox QAbstractItemView {
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid #8A2BE2;
+    selection-background-color: #A020F0;
+    color: white;
+    font-size: 14px;
+}
+
+/* --- Search Box (QLineEdit + QPushButton) --- */
+QLineEdit#searchBox {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid #8A2BE2;
+    border-radius: 8px;
+    padding: 8px;
+    color: white;
+    font-size: 14px;
+}
+
+QPushButton#searchButton {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #8A2BE2, stop:1 #4B0082);
+    border: 2px solid #8A2BE2;
+    border-radius: 8px;
+    padding: 8px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+QPushButton#searchButton:hover {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #A020F0, stop:1 #8A2BE2);
+    border-color: #A020F0;
+}
+
+QPushButton#searchButton:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #4B0082, stop:1 #8A2BE2);
+    border-color: #4B0082;
+}
+
+/* --- Scrollbars --- */
+QScrollBar:vertical {
+    background: rgba(255, 255, 255, 0.1);
+    width: 12px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:vertical {
+    background: #8A2BE2;
+    min-height: 20px;
+    border-radius: 6px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+QScrollBar:horizontal {
+    background: rgba(255, 255, 255, 0.1);
+    height: 12px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #8A2BE2;
+    min-width: 20px;
+    border-radius: 6px;
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    background: none;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}
