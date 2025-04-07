@@ -1,22 +1,31 @@
 #include "consultant.h"
 
-// Constructeur par défaut
 Consultant::Consultant()
-    : id_consultant(0), nom_consultant(""), prenom_consultant(""), telephone("") {}
+    : id_consultant(0), nom_consultant(""), prenom_consultant(""), telephone(""), date_ajout("") {}
 
-// Constructeur paramétré
-Consultant::Consultant(int id, QString nom, QString prenom, QString telephone)
-    : id_consultant(id), nom_consultant(nom), prenom_consultant(prenom), telephone(telephone) {}
+Consultant::Consultant(int id, QString nom, QString prenom, QString telephone, QString dateAjout)
+    : id_consultant(id), nom_consultant(nom), prenom_consultant(prenom), telephone(telephone), date_ajout(dateAjout) {}
+int Consultant::getIdConsultant() const { return id_consultant; }
+QString Consultant::getNomConsultant() const { return nom_consultant; }
+QString Consultant::getPrenomConsultant() const { return prenom_consultant; }
+QString Consultant::getTelephone() const { return telephone; }
+QString Consultant::getDateAjout() const { return date_ajout; }
 
+void Consultant::setIdConsultant(int id) { this->id_consultant = id; }
+void Consultant::setNomConsultant(const QString &nom) { this->nom_consultant = nom; }
+void Consultant::setPrenomConsultant(const QString &prenom) { this->prenom_consultant = prenom; }
+void Consultant::setTelephone(const QString &telephone) { this->telephone = telephone; }
+void Consultant::setDateAjout(const QString &dateAjout) { this->date_ajout = dateAjout; }
 // Ajouter un consultant dans la base de données
 bool Consultant::ajouter() {
     QSqlQuery query;
-    query.prepare("INSERT INTO CONSULTANT (ID_CONSULTANT, NOM_CONSULTANT, PRENOM_CONSULTANT, TELEPHONE) "
-                  "VALUES (:id, :nom, :prenom, :telephone)");
+    query.prepare("INSERT INTO CONSULTANT (ID_CONSULTANT, NOM_CONSULTANT, PRENOM_CONSULTANT, TELEPHONE, DATE_AJOUT) "
+                  "VALUES (:id, :nom, :prenom, :telephone, TO_DATE(:dateajout, 'YYYY-MM-DD'))");
     query.bindValue(":id", id_consultant);
     query.bindValue(":nom", nom_consultant);
     query.bindValue(":prenom", prenom_consultant);
     query.bindValue(":telephone", telephone);
+    query.bindValue(":dateajout", date_ajout); // plus besoin de TO_DATE()
 
     if (!query.exec()) {
         qDebug() << "Échec de l'ajout du consultant :" << query.lastError().text();
@@ -25,7 +34,7 @@ bool Consultant::ajouter() {
     return true;
 }
 
-// Afficher tous les consultants
+
 QSqlQueryModel* Consultant::afficher() {
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query;
@@ -37,18 +46,15 @@ QSqlQueryModel* Consultant::afficher() {
     }
 
     model->setQuery(query);
-
-    if (model->rowCount() == 0) {
-        qDebug() << "Aucune donnée trouvée dans la table CONSULTANT.";
-    }
-
-    model->setHeaderData(0, Qt::Horizontal, "ID Consultant");
+    model->setHeaderData(0, Qt::Horizontal, "ID");
     model->setHeaderData(1, Qt::Horizontal, "Nom");
     model->setHeaderData(2, Qt::Horizontal, "Prénom");
     model->setHeaderData(3, Qt::Horizontal, "Téléphone");
+    model->setHeaderData(4, Qt::Horizontal, "Date Ajout");
 
     return model;
 }
+
 
 // Supprimer un consultant
 bool Consultant::supprimer(int id) {
@@ -61,11 +67,16 @@ bool Consultant::supprimer(int id) {
 // Modifier un consultant
 bool Consultant::modifier(int id) {
     QSqlQuery query;
-    query.prepare("UPDATE CONSULTANT SET NOM_CONSULTANT = :nom, PRENOM_CONSULTANT = :prenom, TELEPHONE = :telephone "
+    query.prepare("UPDATE CONSULTANT SET NOM_CONSULTANT = :nom, "
+                  "PRENOM_CONSULTANT = :prenom, "
+                  "TELEPHONE = :telephone, "
+                  "DATE_AJOUT = :dateAjout "
                   "WHERE ID_CONSULTANT = :id");
+
     query.bindValue(":nom", nom_consultant);
     query.bindValue(":prenom", prenom_consultant);
     query.bindValue(":telephone", telephone);
+    query.bindValue(":dateAjout", date_ajout);  // Ajout de la date
     query.bindValue(":id", id);
 
     if (!query.exec()) {
@@ -74,6 +85,7 @@ bool Consultant::modifier(int id) {
     }
     return true;
 }
+
 
 // Rechercher un consultant
 QSqlQueryModel* Consultant::rechercher(const QString& searchTerm) {
