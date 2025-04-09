@@ -2,30 +2,38 @@
 #define PROJET_H
 
 #include <QString>
-#include <QDate>  // Include QDate for date handling
+#include <QDate>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include <QtCharts/QChartView>
 
 class Projet
 {
 public:
     Projet();
-    Projet(QString nom, QString desc, QDate debut, QDate fin, int prio, double bud);
+    Projet(QString nom, QString desc, QDate debut, QDate fin, QString status, int prio, double bud, int id_emp, int id_cli);
 
-    bool ajouter();  // Function to insert project data into the database
-    QSqlQueryModel *afficher();  // Function to display projects
-    bool modifier(int id);       // Function to update a project by ID
-    bool supprimer(int id);      // Function to delete a project by ID
-    bool nomExists(const QString &nom);  // Function to check if a project name already exists
+    bool ajouter();
+    QSqlQueryModel *afficher();
+    bool modifier(int id);
+    bool supprimer(int id);
+    bool nomExists(const QString &nom);
+    QSqlQueryModel *rechercherEtTrier(const QString &nom, int sortOption);
+    QChartView* getProjectBudgetChart();
+    QChartView* getColoredBudgetChart();
+
 
 private:
-    int id_projet;    // New primary key field
+    int id_projet;
     QString nom_projet;
     QString description;
-    QDate date_debut;  // Change to QDate
-    QDate date_fin;    // Change to QDate
+    QDate date_debut;
+    QDate date_fin;
+    QString status;
     int priorite;
     double budget;
+    int id_employe;
+    int id_client;
 };
 
 #endif // PROJET_H
