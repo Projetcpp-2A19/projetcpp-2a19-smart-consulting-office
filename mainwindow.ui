@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1290</width>
-    <height>711</height>
+    <height>776</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>30</y>
+      <y>10</y>
       <width>1241</width>
-      <height>611</height>
+      <height>681</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -51,7 +51,7 @@ QTabBar::tab:hover {
 </string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Projects">
      <attribute name="title">
@@ -62,7 +62,7 @@ QTabBar::tab:hover {
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>321</width>
+        <width>331</width>
         <height>551</height>
        </rect>
       </property>
@@ -142,7 +142,7 @@ QDateEdit::drop-down {
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>450</y>
+         <y>420</y>
          <width>88</width>
          <height>25</height>
         </rect>
@@ -319,7 +319,7 @@ QDateEdit::drop-down {
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>420</y>
+         <y>450</y>
          <width>81</width>
          <height>25</height>
         </rect>
@@ -434,8 +434,8 @@ QDateEdit::drop-down {
       <widget class="QComboBox" name="employeComboBox">
        <property name="geometry">
         <rect>
-         <x>100</x>
-         <y>370</y>
+         <x>30</x>
+         <y>380</y>
          <width>91</width>
          <height>26</height>
         </rect>
@@ -444,11 +444,33 @@ QDateEdit::drop-down {
       <widget class="QComboBox" name="clientComboBox">
        <property name="geometry">
         <rect>
-         <x>220</x>
-         <y>370</y>
+         <x>140</x>
+         <y>380</y>
          <width>91</width>
          <height>26</height>
         </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>350</y>
+         <width>211</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2c3e50; /* Gris foncé */
+    padding: 3px;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>choose employe and client:</string>
        </property>
       </widget>
      </widget>
@@ -468,9 +490,9 @@ QDateEdit::drop-down {
      <widget class="QGroupBox" name="groupBox_3">
       <property name="geometry">
        <rect>
-        <x>340</x>
+        <x>350</x>
         <y>10</y>
-        <width>891</width>
+        <width>881</width>
         <height>551</height>
        </rect>
       </property>
@@ -497,10 +519,10 @@ QGroupBox::title {
       <widget class="QTableView" name="tableView">
        <property name="geometry">
         <rect>
-         <x>30</x>
+         <x>40</x>
          <y>120</y>
-         <width>711</width>
-         <height>231</height>
+         <width>671</width>
+         <height>261</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -529,7 +551,7 @@ QTableView::header {
       <widget class="QSplitter" name="splitter_5">
        <property name="geometry">
         <rect>
-         <x>760</x>
+         <x>740</x>
          <y>190</y>
          <width>121</width>
          <height>105</height>
@@ -708,6 +730,170 @@ QPushButton:pressed {
     background-color: #1c5985;
 }
 </string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Page</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>810</x>
+        <y>0</y>
+        <width>411</width>
+        <height>601</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox {
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 5px 10px;
+    color: #3498db;
+}
+</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>391</width>
+         <height>571</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayoutCharts"/>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>160</y>
+        <width>791</width>
+        <height>391</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox {
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 5px 10px;
+    color: #3498db;
+}
+</string>
+      </property>
+      <property name="title">
+       <string>Projects</string>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>771</width>
+         <height>341</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayoutTracking"/>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>50</y>
+        <width>261</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:700; font-style:italic; color:#00aaff;&quot;&gt;Project Tracker :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Page</string>
+     </attribute>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>20</y>
+        <width>311</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:700; font-style:italic; color:#00aaff;&quot;&gt;Projects Calendar :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_6">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>80</y>
+        <width>1001</width>
+        <height>541</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox {
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 5px 10px;
+    color: #3498db;
+}
+</string>
+      </property>
+      <property name="title">
+       <string>Calendar</string>
+      </property>
+      <widget class="QGraphicsView" name="ganttGraphicsView_2">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>941</width>
+         <height>491</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>300</height>
+        </size>
        </property>
       </widget>
      </widget>

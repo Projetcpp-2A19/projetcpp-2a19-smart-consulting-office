@@ -11,7 +11,11 @@ class Projet
 {
 public:
     Projet();
-    Projet(QString nom, QString desc, QDate debut, QDate fin, QString status, int prio, double bud, int id_emp, int id_cli);
+    Projet(QString nom, QString desc, QDate debut, QDate fin, QString status,
+           int prio, double bud, int id_emp, int id_cli, int progress = 0);
+
+    int getProgress() const;
+    void setProgress(int value);
 
     bool ajouter();
     QSqlQueryModel *afficher();
@@ -34,6 +38,7 @@ private:
     double budget;
     int id_employe;
     int id_client;
+    int progress;
 };
 
 #endif // PROJET_H

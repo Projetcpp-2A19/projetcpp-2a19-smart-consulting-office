@@ -11,10 +11,14 @@
 
 Projet::Projet() {}
 
-Projet::Projet(QString nom, QString desc, QDate debut, QDate fin, QString status, int prio, double bud, int id_emp, int id_cli)
+Projet::Projet(QString nom, QString desc, QDate debut, QDate fin, QString status,
+               int prio, double bud, int id_emp, int id_cli, int progress)
     : nom_projet(nom), description(desc), date_debut(debut), date_fin(fin),
-    status(status), priorite(prio), budget(bud), id_employe(id_emp), id_client(id_cli)
-{}
+    status(status), priorite(prio), budget(bud), id_employe(id_emp),
+    id_client(id_cli), progress(progress) {}
+
+int Projet::getProgress() const { return progress; }
+void Projet::setProgress(int value) { progress = value; }
 
 bool Projet::ajouter() {
     if (nomExists(nom_projet)) {
@@ -23,9 +27,10 @@ bool Projet::ajouter() {
     }
 
     QSqlQuery query;
-    query.prepare("INSERT INTO PROJET (NOM_PROJET, DESCRIPTION, DATE_DEBUT, DATE_FIN, STATUS, PRIORITE, BUDGET, ID_EMPLOYE, ID_CLIENT) "
+    query.prepare("INSERT INTO PROJET (NOM_PROJET, DESCRIPTION, DATE_DEBUT, DATE_FIN, "
+                  "STATUS, PRIORITE, BUDGET, ID_EMPLOYE, ID_CLIENT, PROGRESS) "
                   "VALUES (:nom, :desc, TO_DATE(:debut, 'YYYY-MM-DD'), TO_DATE(:fin, 'YYYY-MM-DD'), "
-                  ":status, :prio, :budget, :id_emp, :id_cli)");
+                  ":status, :prio, :budget, :id_emp, :id_cli, :progress)");
 
     query.bindValue(":nom", nom_projet);
     query.bindValue(":desc", description);
@@ -36,6 +41,9 @@ bool Projet::ajouter() {
     query.bindValue(":budget", budget);
     query.bindValue(":id_emp", id_employe);
     query.bindValue(":id_cli", id_client);
+    query.bindValue(":progress", progress);
+
+
 
     if(!query.exec()) {
         qDebug() << "Error adding project:" << query.lastError().text();
@@ -65,7 +73,8 @@ bool Projet::modifier(int id) {
     query.prepare("UPDATE PROJET SET NOM_PROJET=:nom, DESCRIPTION=:desc, "
                   "DATE_DEBUT=TO_DATE(:debut, 'YYYY-MM-DD'), DATE_FIN=TO_DATE(:fin, 'YYYY-MM-DD'), "
                   "STATUS=:status, PRIORITE=:prio, BUDGET=:budget, "
-                  "ID_EMPLOYE=:id_emp, ID_CLIENT=:id_cli WHERE ID_PROJET=:id");
+                  "ID_EMPLOYE=:id_emp, ID_CLIENT=:id_cli, PROGRESS=:progress "
+                  "WHERE ID_PROJET=:id");
 
     query.bindValue(":nom", nom_projet);
     query.bindValue(":desc", description);
@@ -76,6 +85,7 @@ bool Projet::modifier(int id) {
     query.bindValue(":budget", budget);
     query.bindValue(":id_emp", id_employe);
     query.bindValue(":id_cli", id_client);
+    query.bindValue(":progress", progress);
     query.bindValue(":id", id);
 
     if(!query.exec()) {
