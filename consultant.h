@@ -6,6 +6,9 @@
 #include <QSqlQueryModel>
 #include <QSqlError>
 #include <QDebug>
+#include <QFile>
+#include <QTextStream>
+#include <QDateTime>
 
 class Consultant {
 private:
@@ -36,6 +39,9 @@ public:
     bool supprimer(int id);
     bool modifier(int id);
     QSqlQueryModel* rechercher(const QString& searchTerm);
+    static bool restaurer(int id, const QString &nom, const QString &prenom, 
+                         const QString &telephone, const QString &dateAjout);
+    static bool supprimerDeLhistorique(const QString &ligne);
 };
 
 #endif // CONSULTANT_H

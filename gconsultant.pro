@@ -1,7 +1,8 @@
-QT       += core gui
+QT       += core gui network
+QT += serialport
 LIBS += -lodbc32
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets sql charts
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets sql charts core network printsupport
 
 CONFIG += c++17
 
@@ -13,12 +14,15 @@ SOURCES += \
     connection.cpp \
     consultant.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    sms.cpp
 
 HEADERS += \
+    arduino.h \
     connection.h \
     consultant.h \
-    mainwindow.h
+    mainwindow.h \
+    sms.h
 
 FORMS += \
     mainwindow.ui

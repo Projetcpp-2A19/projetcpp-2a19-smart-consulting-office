@@ -43,11 +43,6 @@ public:
     QPushButton *pushButton_3;
     QLabel *label_8;
     QDateEdit *dateAjoutLineEdit;
-    QLabel *label_9;
-    QLineEdit *lineEdit_6;
-    QPushButton *pushButton_2;
-    QLabel *label_10;
-    QGroupBox *groupBox_4;
     QGroupBox *groupBox_3;
     QGroupBox *groupBox_2;
     QLabel *label_5;
@@ -62,7 +57,13 @@ public:
     QPushButton *exportpdfbutton;
     QPushButton *statistiquepushbutton;
     QWidget *staticWidget;
+    QPushButton *historique;
     QPushButton *hidepushbutton;
+    QPushButton *sendsms;
+    QLineEdit *numerolineedit;
+    QLineEdit *textsms;
+    QLabel *label_9;
+    QLabel *label_10;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -154,52 +155,9 @@ public:
         dateAjoutLineEdit = new QDateEdit(groupBox);
         dateAjoutLineEdit->setObjectName("dateAjoutLineEdit");
         dateAjoutLineEdit->setGeometry(QRect(280, 230, 161, 26));
-        label_9 = new QLabel(centralwidget);
-        label_9->setObjectName("label_9");
-        label_9->setGeometry(QRect(120, 470, 161, 20));
-        lineEdit_6 = new QLineEdit(centralwidget);
-        lineEdit_6->setObjectName("lineEdit_6");
-        lineEdit_6->setGeometry(QRect(310, 470, 113, 26));
-        pushButton_2 = new QPushButton(centralwidget);
-        pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(360, 640, 93, 29));
-        pushButton_2->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"    background-color: #3498db;\n"
-"    color: white;\n"
-"    border-radius: 5px;\n"
-"    padding: 8px 15px;\n"
-"    font-size: 14px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #2980b9;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: #1c5985;\n"
-"}\n"
-""));
-        label_10 = new QLabel(centralwidget);
-        label_10->setObjectName("label_10");
-        label_10->setGeometry(QRect(120, 510, 361, 161));
-        groupBox_4 = new QGroupBox(centralwidget);
-        groupBox_4->setObjectName("groupBox_4");
-        groupBox_4->setGeometry(QRect(89, 449, 481, 241));
-        groupBox_4->setStyleSheet(QString::fromUtf8("QGroupBox {\n"
-"    border: 2px solid #3498db;\n"
-"    border-radius: 10px;\n"
-"    margin-top: 10px;\n"
-"    font-weight: bold;\n"
-"    font-size: 14px;\n"
-"    padding: 10px;\n"
-"}\n"
-"QGroupBox::title {\n"
-"    subcontrol-origin: margin;\n"
-"    subcontrol-position: top left;\n"
-"    padding: 5px 10px;\n"
-"    color: #3498db;\n"
-"}"));
         groupBox_3 = new QGroupBox(centralwidget);
         groupBox_3->setObjectName("groupBox_3");
-        groupBox_3->setGeometry(QRect(60, 30, 1331, 691));
+        groupBox_3->setGeometry(QRect(0, 40, 1331, 691));
         groupBox_3->setStyleSheet(QString::fromUtf8("QGroupBox {\n"
 "    border: 2px solid #3498db;\n"
 "    border-radius: 10px;\n"
@@ -217,7 +175,7 @@ public:
         groupBox_2 = new QGroupBox(groupBox_3);
         groupBox_2->setObjectName("groupBox_2");
         groupBox_2->setEnabled(true);
-        groupBox_2->setGeometry(QRect(520, 20, 741, 641));
+        groupBox_2->setGeometry(QRect(580, 20, 741, 641));
         groupBox_2->setStyleSheet(QString::fromUtf8("QGroupBox {\n"
 "    border: 2px solid #3498db;\n"
 "    border-radius: 10px;\n"
@@ -320,7 +278,23 @@ public:
 "}"));
         staticWidget = new QWidget(groupBox_2);
         staticWidget->setObjectName("staticWidget");
-        staticWidget->setGeometry(QRect(30, 320, 701, 271));
+        staticWidget->setGeometry(QRect(70, 310, 701, 271));
+        historique = new QPushButton(staticWidget);
+        historique->setObjectName("historique");
+        historique->setGeometry(QRect(-30, 0, 141, 29));
+        historique->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}"));
         hidepushbutton = new QPushButton(groupBox_2);
         hidepushbutton->setObjectName("hidepushbutton");
         hidepushbutton->setGeometry(QRect(640, 600, 93, 31));
@@ -337,6 +311,7 @@ public:
 "QPushButton:pressed {\n"
 "    background-color: #1c5985;\n"
 "}"));
+        staticWidget->raise();
         label_5->raise();
         label_6->raise();
         chercherconsultqntlineedit->raise();
@@ -348,19 +323,41 @@ public:
         exportpdfbutton->raise();
         consultantTable->raise();
         statistiquepushbutton->raise();
-        staticWidget->raise();
         hidepushbutton->raise();
+        sendsms = new QPushButton(groupBox_3);
+        sendsms->setObjectName("sendsms");
+        sendsms->setGeometry(QRect(350, 620, 93, 29));
+        sendsms->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}"));
+        numerolineedit = new QLineEdit(groupBox_3);
+        numerolineedit->setObjectName("numerolineedit");
+        numerolineedit->setGeometry(QRect(200, 580, 113, 26));
+        textsms = new QLineEdit(groupBox_3);
+        textsms->setObjectName("textsms");
+        textsms->setGeometry(QRect(90, 470, 251, 91));
+        label_9 = new QLabel(groupBox_3);
+        label_9->setObjectName("label_9");
+        label_9->setGeometry(QRect(20, 580, 191, 20));
+        label_10 = new QLabel(groupBox_3);
+        label_10->setObjectName("label_10");
+        label_10->setGeometry(QRect(20, 490, 191, 20));
         MainWindow->setCentralWidget(centralwidget);
         groupBox_3->raise();
         groupBox->raise();
-        label_9->raise();
-        lineEdit_6->raise();
-        pushButton_2->raise();
-        label_10->raise();
-        groupBox_4->raise();
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1400, 26));
+        menubar->setGeometry(QRect(0, 0, 1400, 25));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -384,18 +381,7 @@ public:
         label_4->setText(QCoreApplication::translate("MainWindow", "numero de telephone :", nullptr));
         QJOUTERCONSULTQNTBUTTON->setText(QCoreApplication::translate("MainWindow", "ajouter ", nullptr));
         pushButton_3->setText(QCoreApplication::translate("MainWindow", "annuler", nullptr));
-        label_8->setText(QCoreApplication::translate("MainWindow", "prenom:", nullptr));
-        label_9->setText(QCoreApplication::translate("MainWindow", "numero de telephone :", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "envoyer", nullptr));
-        label_10->setText(QCoreApplication::translate("MainWindow", "Bonjour,\n"
-"Ceci est un rappel concernant votre rendez-vous pr\303\251vu\n"
-" avec le responsable des consultants.\n"
-" Merci d\342\200\231\303\252tre ponctuel et de confirmer votre disponibilit\303\251 \n"
-"si n\303\251cessaire.\n"
-"\n"
-"Bonne journ\303\251e,\n"
-"Chef des Consultants", nullptr));
-        groupBox_4->setTitle(QCoreApplication::translate("MainWindow", "alertes par sms ", nullptr));
+        label_8->setText(QCoreApplication::translate("MainWindow", "date", nullptr));
         groupBox_3->setTitle(QCoreApplication::translate("MainWindow", "gestion des consultants:", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "gestion de liste des consultants :", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "liste des consultants:", nullptr));
@@ -407,7 +393,11 @@ public:
         odifyconsultant->setText(QCoreApplication::translate("MainWindow", "modifier", nullptr));
         exportpdfbutton->setText(QCoreApplication::translate("MainWindow", "exporter en pdf", nullptr));
         statistiquepushbutton->setText(QCoreApplication::translate("MainWindow", "Statistique", nullptr));
+        historique->setText(QCoreApplication::translate("MainWindow", "Historique", nullptr));
         hidepushbutton->setText(QCoreApplication::translate("MainWindow", "hide", nullptr));
+        sendsms->setText(QCoreApplication::translate("MainWindow", "send", nullptr));
+        label_9->setText(QCoreApplication::translate("MainWindow", "numero de telephone :", nullptr));
+        label_10->setText(QCoreApplication::translate("MainWindow", "sms :", nullptr));
     } // retranslateUi
 
 };

@@ -209,7 +209,7 @@ QPushButton:pressed {
       </rect>
      </property>
      <property name="text">
-      <string>prenom:</string>
+      <string>date</string>
      </property>
     </widget>
     <widget class="QDateEdit" name="dateAjoutLineEdit">
@@ -223,112 +223,11 @@ QPushButton:pressed {
      </property>
     </widget>
    </widget>
-   <widget class="QLabel" name="label_9">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>470</y>
-      <width>161</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>numero de telephone :</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_6">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>470</y>
-      <width>113</width>
-      <height>26</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>640</y>
-      <width>93</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-    background-color: #3498db;
-    color: white;
-    border-radius: 5px;
-    padding: 8px 15px;
-    font-size: 14px;
-}
-QPushButton:hover {
-    background-color: #2980b9;
-}
-QPushButton:pressed {
-    background-color: #1c5985;
-}
-</string>
-    </property>
-    <property name="text">
-     <string>envoyer</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_10">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>510</y>
-      <width>361</width>
-      <height>161</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Bonjour,
-Ceci est un rappel concernant votre rendez-vous prévu
- avec le responsable des consultants.
- Merci d’être ponctuel et de confirmer votre disponibilité 
-si nécessaire.
-
-Bonne journée,
-Chef des Consultants</string>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_4">
-    <property name="geometry">
-     <rect>
-      <x>89</x>
-      <y>449</y>
-      <width>481</width>
-      <height>241</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QGroupBox {
-    border: 2px solid #3498db;
-    border-radius: 10px;
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 10px;
-}
-QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top left;
-    padding: 5px 10px;
-    color: #3498db;
-}</string>
-    </property>
-    <property name="title">
-     <string>alertes par sms </string>
-    </property>
-   </widget>
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>30</y>
+      <x>0</x>
+      <y>40</y>
       <width>1331</width>
       <height>691</height>
      </rect>
@@ -358,7 +257,7 @@ QGroupBox::title {
      </property>
      <property name="geometry">
       <rect>
-       <x>520</x>
+       <x>580</x>
        <y>20</y>
        <width>741</width>
        <height>641</height>
@@ -584,12 +483,40 @@ QPushButton:pressed {
      <widget class="QWidget" name="staticWidget" native="true">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>320</y>
+        <x>70</x>
+        <y>310</y>
         <width>701</width>
         <height>271</height>
        </rect>
       </property>
+      <widget class="QPushButton" name="historique">
+       <property name="geometry">
+        <rect>
+         <x>-30</x>
+         <y>0</y>
+         <width>141</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:pressed {
+    background-color: #1c5985;
+}</string>
+       </property>
+       <property name="text">
+        <string>Historique</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QPushButton" name="hidepushbutton">
       <property name="geometry">
@@ -619,6 +546,7 @@ QPushButton:pressed {
        <string>hide</string>
       </property>
      </widget>
+     <zorder>staticWidget</zorder>
      <zorder>label_5</zorder>
      <zorder>label_6</zorder>
      <zorder>chercherconsultqntlineedit</zorder>
@@ -630,17 +558,85 @@ QPushButton:pressed {
      <zorder>exportpdfbutton</zorder>
      <zorder>consultantTable</zorder>
      <zorder>statistiquepushbutton</zorder>
-     <zorder>staticWidget</zorder>
      <zorder>hidepushbutton</zorder>
+    </widget>
+    <widget class="QPushButton" name="sendsms">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>620</y>
+       <width>93</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:pressed {
+    background-color: #1c5985;
+}</string>
+     </property>
+     <property name="text">
+      <string>send</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="numerolineedit">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>580</y>
+       <width>113</width>
+       <height>26</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="textsms">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>470</y>
+       <width>251</width>
+       <height>91</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>580</y>
+       <width>191</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>numero de telephone :</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>490</y>
+       <width>191</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>sms :</string>
+     </property>
     </widget>
    </widget>
    <zorder>groupBox_3</zorder>
    <zorder>groupBox</zorder>
-   <zorder>label_9</zorder>
-   <zorder>lineEdit_6</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>label_10</zorder>
-   <zorder>groupBox_4</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -648,7 +644,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>1400</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

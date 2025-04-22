@@ -14,6 +14,9 @@
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
 #include  <QVBoxLayout>
+#include "sms.h"
+
+
 
 
 #include "consultant.h"
@@ -48,6 +51,7 @@ private slots:
     void on_odifyconsultant_clicked();
 
     void on_consultantTable_clicked(const QModelIndex &index);
+
     void on_searchConsultantByTyping(const QString &searchText);
 
 
@@ -62,8 +66,13 @@ private slots:
 
     void on_hidepushbutton_clicked();
 
+    void on_sendsms_clicked();
+
+    void on_historiqueButton_clicked();
+
 private:
     void initializeConsultantTableModel() ;
+    void afficherHistorique();
 
 private:
     Ui::MainWindow *ui;
@@ -72,6 +81,8 @@ private:
 
 
     QSortFilterProxyModel* consultantProxyModel;
+public:
+    SmsSender*sarah;
 
 };
 #endif // MAINWINDOW_H
