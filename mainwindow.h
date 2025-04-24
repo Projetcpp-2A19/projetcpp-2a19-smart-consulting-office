@@ -1,5 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#include"arduino.h"
 
 #include <QMainWindow>
 #include  <QSqlTableModel>
@@ -83,6 +84,7 @@ private:
     QSortFilterProxyModel* consultantProxyModel;
 public:
     SmsSender*sarah;
+    Arduino A;
 
 };
 #endif // MAINWINDOW_H

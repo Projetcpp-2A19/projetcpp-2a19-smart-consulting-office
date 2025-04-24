@@ -483,40 +483,12 @@ QPushButton:pressed {
      <widget class="QWidget" name="staticWidget" native="true">
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>20</x>
         <y>310</y>
         <width>701</width>
         <height>271</height>
        </rect>
       </property>
-      <widget class="QPushButton" name="historique">
-       <property name="geometry">
-        <rect>
-         <x>-30</x>
-         <y>0</y>
-         <width>141</width>
-         <height>29</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #3498db;
-    color: white;
-    border-radius: 5px;
-    padding: 8px 15px;
-    font-size: 14px;
-}
-QPushButton:hover {
-    background-color: #2980b9;
-}
-QPushButton:pressed {
-    background-color: #1c5985;
-}</string>
-       </property>
-       <property name="text">
-        <string>Historique</string>
-       </property>
-      </widget>
      </widget>
      <widget class="QPushButton" name="hidepushbutton">
       <property name="geometry">
@@ -644,7 +616,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>1400</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
