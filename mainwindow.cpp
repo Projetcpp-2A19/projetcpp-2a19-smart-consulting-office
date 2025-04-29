@@ -41,9 +41,19 @@ MainWindow::MainWindow(QWidget *parent) :
     clientModel(new QSqlQueryModel(this)),
     trackingModel(new QSqlQueryModel(this)),
     chartView(nullptr),
-    ganttScene(nullptr)
+    ganttScene(nullptr),
+    temperatureTimer(new QTimer(this)),
+    currentThreshold(25.0),
+    currentProjectId(-1)// Default threshold
+
 {
     ui->setupUi(this);
+
+    temperatureTimer = new QTimer(this);
+    connect(temperatureTimer, &QTimer::timeout, this, &MainWindow::updateTemperature);
+
+    // Initialize threshold display
+    ui->thresholdSpinBox->setValue(currentThreshold);
     initializeGanttScene();
     this->setWindowTitle("Project Management System");
 
@@ -144,20 +154,20 @@ void MainWindow::loadData() {
     updateTrackingView();
     ui->tableView->setModel(model);
 
-    // Set column headers
+    // Set column headers - ONLY 10 COLUMNS (0-9)
     model->setHeaderData(0, Qt::Horizontal, tr("ID"));
     model->setHeaderData(1, Qt::Horizontal, tr("Name"));
     model->setHeaderData(2, Qt::Horizontal, tr("Description"));
     model->setHeaderData(3, Qt::Horizontal, tr("Start Date"));
     model->setHeaderData(4, Qt::Horizontal, tr("End Date"));
     model->setHeaderData(5, Qt::Horizontal, tr("Status"));
-    model->setHeaderData(6, Qt::Horizontal, tr("Priority"));
+    model->setHeaderData(6, Qt::Horizontal, tr("Priority"));  // ONLY PRIORITY HERE
     model->setHeaderData(7, Qt::Horizontal, tr("Budget"));
-    model->setHeaderData(8, Qt::Horizontal, tr("Employee ID"));  // Changed from "Employee"
-    model->setHeaderData(9, Qt::Horizontal, tr("Client ID"));    // Changed from "Client"
-    model->setHeaderData(6, Qt::Horizontal, tr("Progress"));
-    ui->tableView->resizeColumnsToContents();
+    model->setHeaderData(8, Qt::Horizontal, tr("Employee ID"));
+    model->setHeaderData(9, Qt::Horizontal, tr("Client ID"));
+    // NO HEADER FOR PROGRESS IN MAIN TABLE
 
+    ui->tableView->resizeColumnsToContents();
 }
 
 void MainWindow::loadEmployes() {
@@ -554,10 +564,11 @@ void MainWindow::on_exportButton_clicked()
 
 void MainWindow::setupTrackingTable()
 {
+    //Création de la table
     trackingTableView = new QTableView(this);
     trackingTableView->setObjectName("trackingTableView");
     trackingTableView->setModel(trackingModel);
-
+    //Ajout dans la mise en page (layout)
     QVBoxLayout *trackingLayout = findChild<QVBoxLayout*>("verticalLayoutTracking");
     if (trackingLayout) {
         trackingLayout->addWidget(trackingTableView);
@@ -565,13 +576,13 @@ void MainWindow::setupTrackingTable()
         ui->verticalLayout->addWidget(trackingTableView);
         qWarning() << "Tracking layout not found, using main layout as fallback";
     }
-
+    //Personnalisation de la table
     trackingTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     trackingTableView->setSelectionMode(QAbstractItemView::SingleSelection);
     trackingTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     trackingTableView->setAlternatingRowColors(true);
     trackingTableView->setContextMenuPolicy(Qt::CustomContextMenu);
-
+    //Connexion au menu contextuel
     connect(trackingTableView, &QTableView::customContextMenuRequested,
             this, &MainWindow::showTrackingContextMenu);
 
@@ -590,7 +601,7 @@ void MainWindow::updateTrackingView()
                   "FROM PROJET "
                   "WHERE STATUS NOT LIKE '%Completed%' "
                   "ORDER BY PRIORITE DESC, DATE_FIN");
-
+//Définit les noms de colonnes
     if(query.exec()) {
         trackingModel->setQuery(query);
 
@@ -601,7 +612,7 @@ void MainWindow::updateTrackingView()
         trackingModel->setHeaderData(4, Qt::Horizontal, tr("Status"));
         trackingModel->setHeaderData(5, Qt::Horizontal, tr("Priority"));
         trackingModel->setHeaderData(6, Qt::Horizontal, tr("Progress"));
-
+// Personnalise l’apparence des colonnes
         trackingTableView->setColumnHidden(0, true);
         trackingTableView->setColumnWidth(1, 250);
         trackingTableView->setColumnWidth(2, 100);
@@ -609,7 +620,7 @@ void MainWindow::updateTrackingView()
         trackingTableView->setColumnWidth(4, 120);
         trackingTableView->setColumnWidth(5, 80);
         trackingTableView->setColumnWidth(6, 100);
-
+//Post-traitement ligne par ligne
         QDate today = QDate::currentDate();
         for(int row = 0; row < trackingModel->rowCount(); ++row) {
             int priority = trackingModel->data(trackingModel->index(row, 5)).toInt();
@@ -637,20 +648,22 @@ void MainWindow::updateTrackingView()
 
 void MainWindow::showTrackingContextMenu(const QPoint &pos)
 {
+    //Vérification de la validité du clic
     QModelIndex index = trackingTableView->indexAt(pos);
     if(!index.isValid()) return;
-
+    // Récupération des informations du projet
     currentlySelectedRow = index.row();
     QString status = trackingModel->data(trackingModel->index(currentlySelectedRow, 4)).toString();
     int currentProgress = trackingModel->data(trackingModel->index(currentlySelectedRow, 6)).toInt();
     int projectId = trackingModel->data(trackingModel->index(currentlySelectedRow, 0)).toInt();
-
+    //Création du menu contextuel
     QMenu menu(this);
 
     if(status.contains("In Progress", Qt::CaseInsensitive)) {
+        //Création du widget
         QWidget *progressWidget = new QWidget();
         QVBoxLayout *layout = new QVBoxLayout(progressWidget);
-
+    //Ajout d’un label, slider et valeur
         QLabel *progressLabel = new QLabel("Set Progress:");
         progressLabel->setAlignment(Qt::AlignCenter);
 
@@ -660,7 +673,7 @@ void MainWindow::showTrackingContextMenu(const QPoint &pos)
 
         QLabel *valueLabel = new QLabel(QString("%1%").arg(currentProgress));
         valueLabel->setAlignment(Qt::AlignCenter);
-
+//Connexion du slider à la mise à jour de la base
         connect(progressSlider, &QSlider::valueChanged, [valueLabel, this, projectId](int value) {
             valueLabel->setText(QString("%1%").arg(value));
 
@@ -680,7 +693,7 @@ void MainWindow::showTrackingContextMenu(const QPoint &pos)
         layout->addWidget(progressSlider);
         layout->addWidget(valueLabel);
         layout->setContentsMargins(10, 5, 10, 5);
-
+//Ajout du widget dans le menu
         QWidgetAction *progressAction = new QWidgetAction(&menu);
         progressAction->setDefaultWidget(progressWidget);
         menu.addAction(progressAction);
@@ -998,6 +1011,7 @@ void MainWindow::updateStatusChart()
 
 void MainWindow::initializeGanttScene()
 {
+    //Création d’une nouvelle scène graphique pour le Gantt
     ganttScene = new QGraphicsScene(this);
     ui->ganttGraphicsView_2->setScene(ganttScene);
     ui->ganttGraphicsView_2->setRenderHint(QPainter::Antialiasing);
@@ -1005,6 +1019,7 @@ void MainWindow::initializeGanttScene()
     ganttScene->setSceneRect(-300, 0, 2500, 800);
 }
 
+//Cette fonction met à jour dynamiquement le diagramme de Gantt, en affichant les projets et les dates
 void MainWindow::updateGanttChart()
 {
     if (!ganttScene) initializeGanttScene();
@@ -1193,4 +1208,90 @@ void MainWindow::adjustViewToContent(int contentHeight)
                     ui->ganttGraphicsView_2->width() + 200,
                     contentHeight + 50);
     ui->ganttGraphicsView_2->fitInView(viewRect, Qt::KeepAspectRatioByExpanding);
+}
+
+
+void MainWindow::on_connectArduino_clicked() {
+    QSerialPort* port = arduino.getserial();
+    port->setPortName("COM3"); // Or your actual port
+
+    if(port->open(QIODevice::ReadWrite)) {
+        port->setBaudRate(QSerialPort::Baud9600);
+        port->setDataBits(QSerialPort::Data8);
+        port->setParity(QSerialPort::NoParity);
+        port->setStopBits(QSerialPort::OneStop);
+        port->setFlowControl(QSerialPort::NoFlowControl);
+
+        // Test communication
+        port->write("PING\n");
+        if(port->waitForReadyRead(1000)) {
+            qDebug() << "Arduino response:" << port->readAll();
+        }
+
+        ui->arduinoStatusLabel->setText("Connected (Manual)");
+        temperatureTimer->start(2000);
+    } else {
+        qDebug() << "Connection error:" << port->errorString();
+    }
+}
+
+void MainWindow::updateTemperature()
+{
+    QSerialPort* port = arduino.getserial();
+    if(port && port->isOpen()) {
+        port->write("GET_TEMP\n");
+
+        if(port->waitForReadyRead(500)) {
+            QByteArray data = port->readAll();
+            while(port->waitForReadyRead(50)) {
+                data += port->readAll();
+            }
+
+            QString strData = QString(data).trimmed();
+            qDebug() << "Received:" << strData;
+
+            if(strData.startsWith("TEMP:")) {
+                bool ok;
+                float temperature = strData.mid(5).toFloat(&ok);
+                if(ok) {
+                    ui->temperatureLabel->setText(QString::number(temperature, 'f', 1) + " °C");
+
+                    // Visual feedback in QT
+                    QString style = temperature >= currentThreshold
+                                        ? "color: red; font-weight: bold;"
+                                        : "color: black;";
+                    ui->temperatureLabel->setStyleSheet(style);
+
+                    // Update database
+                    if(currentProjectId > 0) {
+                        QSqlQuery query;
+                        query.prepare("UPDATE PROJET SET CURRENT_TEMP = ? WHERE ID = ?");
+                        query.addBindValue(temperature);
+                        query.addBindValue(currentProjectId);
+                        query.exec();
+                    }
+                }
+            }
+        }
+    }
+}
+
+void MainWindow::on_setThreshold_clicked()
+{
+    float newThreshold = ui->thresholdSpinBox->value();
+    if (newThreshold != currentThreshold) {
+        currentThreshold = newThreshold;
+
+        // Send to Arduino
+        arduino.write_to_arduino(QByteArray("SEUIL:" + QString::number(newThreshold).toUtf8()));
+
+        // Update database
+        if (currentProjectId > 0) {
+            QSqlQuery query;
+            query.prepare("UPDATE PROJET SET TEMP_SEUIL = :seuil WHERE ID = :id");
+            query.bindValue(":seuil", newThreshold);
+            query.bindValue(":id", currentProjectId);
+            query.exec();
+        }
+    }
 }
