@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "arduino.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -32,7 +34,27 @@ private slots:
 
     void on_tableViewEmploye_doubleClicked(const QModelIndex &index);
 
+    void on_pushButton_clicked();
+    void initializeSpecialityComboBox();
+    void displaySpecialiteStats();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
+
+
 private:
     Ui::MainWindow *ui;
+    int currentUserId;
+    QString currentUserName;
+    QString currentUserRole;
+    QString generateVerificationCode();
+    bool sendResetEmail(const QString &email, const QString &name, const QString &code);
+    void loginFailed();
+    void showPasswordChangeNotification();
+
+    Arduino A;
+    QTimer* Atimer;
 };
 #endif // MAINWINDOW_H

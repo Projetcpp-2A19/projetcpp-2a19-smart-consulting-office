@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateEdit>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -47,7 +48,6 @@ public:
     QLineEdit *lineEdit_nom;
     QLabel *label_6;
     QLabel *label_5;
-    QLineEdit *lineEdit_specialite;
     QLabel *label;
     QPushButton *add_button;
     QLineEdit *lineEdit_prenom;
@@ -61,7 +61,16 @@ public:
     QLineEdit *lineEdit_Adresse;
     QLineEdit *lineEdit_statut;
     QLabel *label_2;
+    QComboBox *comboBox_specialite;
+    QPushButton *pushButton;
+    QFrame *frame;
     QWidget *page_2;
+    QLineEdit *lineEdit_password;
+    QLineEdit *lineEdit_email_2;
+    QLabel *label_3;
+    QLabel *label_12;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -75,12 +84,12 @@ public:
         centralwidget->setObjectName("centralwidget");
         stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName("stackedWidget");
-        stackedWidget->setGeometry(QRect(30, 20, 1421, 681));
+        stackedWidget->setGeometry(QRect(120, 30, 1551, 921));
         page = new QWidget();
         page->setObjectName("page");
         modifStadeButton = new QPushButton(page);
         modifStadeButton->setObjectName("modifStadeButton");
-        modifStadeButton->setGeometry(QRect(780, 440, 121, 41));
+        modifStadeButton->setGeometry(QRect(890, 400, 121, 41));
         modifStadeButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #3498db;\n"
 "    color: white;\n"
@@ -97,7 +106,7 @@ public:
 ""));
         DeleteStadeButton = new QPushButton(page);
         DeleteStadeButton->setObjectName("DeleteStadeButton");
-        DeleteStadeButton->setGeometry(QRect(950, 440, 101, 41));
+        DeleteStadeButton->setGeometry(QRect(1040, 400, 101, 41));
         DeleteStadeButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #3498db;\n"
 "    color: white;\n"
@@ -113,11 +122,13 @@ public:
 "}\n"
 ""));
         comboBoxsortchamp = new QComboBox(page);
+        comboBoxsortchamp->addItem(QString());
+        comboBoxsortchamp->addItem(QString());
         comboBoxsortchamp->setObjectName("comboBoxsortchamp");
         comboBoxsortchamp->setGeometry(QRect(1220, 120, 101, 41));
         lineEdit_6 = new QLineEdit(page);
         lineEdit_6->setObjectName("lineEdit_6");
-        lineEdit_6->setGeometry(QRect(422, 90, 181, 41));
+        lineEdit_6->setGeometry(QRect(440, 40, 181, 41));
         lineEdit_6->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
 "    border: 2px solid #ddd;\n"
 "    border-radius: 5px;\n"
@@ -137,7 +148,7 @@ public:
 ""));
         tableViewEmploye = new QTableView(page);
         tableViewEmploye->setObjectName("tableViewEmploye");
-        tableViewEmploye->setGeometry(QRect(470, 150, 691, 281));
+        tableViewEmploye->setGeometry(QRect(460, 100, 691, 281));
         tableViewEmploye->setStyleSheet(QString::fromUtf8("QTableView {\n"
 "    background-color: #f0f0f0;\n"
 "    border: 1px solid #dcdcdc;\n"
@@ -243,22 +254,6 @@ public:
 "    color: #2c3e50; /* Gris fonc\303\251 */\n"
 "    padding: 3px;\n"
 "}\n"
-""));
-        lineEdit_specialite = new QLineEdit(groupBox);
-        lineEdit_specialite->setObjectName("lineEdit_specialite");
-        lineEdit_specialite->setGeometry(QRect(160, 410, 161, 41));
-        lineEdit_specialite->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
-"    border: 2px solid #ddd;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    font-size: 14px;\n"
-"    background-color: #f9f9f9;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #3498db;\n"
-"    background-color: white;\n"
-"}\n"
-"\n"
 ""));
         label = new QLabel(groupBox);
         label->setObjectName("label");
@@ -426,14 +421,43 @@ public:
 "    padding: 3px;\n"
 "}\n"
 ""));
+        comboBox_specialite = new QComboBox(groupBox);
+        comboBox_specialite->setObjectName("comboBox_specialite");
+        comboBox_specialite->setGeometry(QRect(170, 420, 141, 31));
+        pushButton = new QPushButton(page);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(1040, 30, 75, 31));
+        frame = new QFrame(page);
+        frame->setObjectName("frame");
+        frame->setGeometry(QRect(470, 470, 621, 211));
+        frame->setFrameShape(QFrame::Shape::StyledPanel);
+        frame->setFrameShadow(QFrame::Shadow::Raised);
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName("page_2");
+        lineEdit_password = new QLineEdit(page_2);
+        lineEdit_password->setObjectName("lineEdit_password");
+        lineEdit_password->setGeometry(QRect(470, 310, 211, 41));
+        lineEdit_email_2 = new QLineEdit(page_2);
+        lineEdit_email_2->setObjectName("lineEdit_email_2");
+        lineEdit_email_2->setGeometry(QRect(470, 240, 211, 41));
+        label_3 = new QLabel(page_2);
+        label_3->setObjectName("label_3");
+        label_3->setGeometry(QRect(338, 250, 71, 20));
+        label_12 = new QLabel(page_2);
+        label_12->setObjectName("label_12");
+        label_12->setGeometry(QRect(338, 320, 81, 20));
+        pushButton_2 = new QPushButton(page_2);
+        pushButton_2->setObjectName("pushButton_2");
+        pushButton_2->setGeometry(QRect(660, 390, 111, 31));
+        pushButton_3 = new QPushButton(page_2);
+        pushButton_3->setObjectName("pushButton_3");
+        pushButton_3->setGeometry(QRect(450, 380, 75, 24));
         stackedWidget->addWidget(page_2);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1601, 26));
+        menubar->setGeometry(QRect(0, 0, 1601, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -441,7 +465,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -452,6 +476,9 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         modifStadeButton->setText(QCoreApplication::translate("MainWindow", "Modifier", nullptr));
         DeleteStadeButton->setText(QCoreApplication::translate("MainWindow", "Supprimer", nullptr));
+        comboBoxsortchamp->setItemText(0, QCoreApplication::translate("MainWindow", "Nom", nullptr));
+        comboBoxsortchamp->setItemText(1, QCoreApplication::translate("MainWindow", "Date d'embauche", nullptr));
+
         lineEdit_6->setPlaceholderText(QCoreApplication::translate("MainWindow", "Enter un employe", nullptr));
         label_8->setText(QCoreApplication::translate("MainWindow", "Trier par:", nullptr));
         comboBox_order->setItemText(0, QCoreApplication::translate("MainWindow", "Ascendant", nullptr));
@@ -469,6 +496,11 @@ public:
         label_11->setText(QCoreApplication::translate("MainWindow", "Date embauche", nullptr));
         label_10->setText(QCoreApplication::translate("MainWindow", "Statut", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Nom ", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "PDF", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "email", nullptr));
+        label_12->setText(QCoreApplication::translate("MainWindow", "password", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Login", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MainWindow", "forget", nullptr));
     } // retranslateUi
 
 };

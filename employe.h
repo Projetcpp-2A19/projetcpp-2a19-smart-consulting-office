@@ -39,8 +39,9 @@ public:
     QSqlQueryModel* afficher();
     bool supprimer(int id_employe);
     bool modifier(int id_employe);
-    static QSqlQueryModel* rechercherParNom(QString nom);
+    QSqlQueryModel* rechercherParNom(QString terme);
     QSqlQueryModel* Tri(QString cls, QString champ);
+    QMap<QString, int> getEmployeeCountBySpecialite();
 
 private:
     int id_employe;
@@ -52,6 +53,7 @@ private:
     QString specialite;
     QString statut;
     QDate date_embauche;
+    QString hashPassword(const QString &password);
 };
 
 #endif // EMPLOYE_H

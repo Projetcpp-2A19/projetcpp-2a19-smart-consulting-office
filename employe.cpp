@@ -146,22 +146,7 @@ bool Employe::modifier(int id_employe) {
     return query.exec();
 }
 
-QSqlQueryModel* Employe::rechercherParNom(QString terme) {
-    QSqlQueryModel* model = new QSqlQueryModel();
-    QSqlQuery query;
 
-    // Prepare the query to search by employee name
-    query.prepare("SELECT id_employe AS id, nom, prenom, adresse, email, specialite, statut, date_embauche FROM employe WHERE nom LIKE :terme OR prenom LIKE :terme");
-    query.bindValue(":terme", "%" + terme + "%");
-
-    if (query.exec()) {
-        model->setQuery(query);
-    } else {
-        qDebug() << "Failed to execute search query:" << query.lastError().text();
-    }
-
-    return model;
-}
 
 QSqlQueryModel* Employe::Tri(QString cls, QString champ) {
     QSqlQueryModel* model = new QSqlQueryModel();
@@ -183,4 +168,34 @@ QSqlQueryModel* Employe::Tri(QString cls, QString champ) {
     model->setHeaderData(8, Qt::Horizontal, QObject::tr("Date d'Embauche"));
 
     return model;
+}
+
+QSqlQueryModel* Employe::rechercherParNom(QString terme) {
+    QSqlQueryModel* model = new QSqlQueryModel();
+    QSqlQuery query;
+
+    // Prepare the query to search by employee name or email
+    query.prepare("SELECT id_employe AS id, nom, prenom, adresse, email, specialite, statut, date_embauche FROM employe WHERE nom LIKE :terme OR prenom LIKE :terme OR email LIKE :terme");
+    query.bindValue(":terme", "%" + terme + "%");
+
+    if (query.exec()) {
+        model->setQuery(query);
+    } else {
+        qDebug() << "Failed to execute search query:" << query.lastError().text();
+    }
+
+    return model;
+}
+
+QMap<QString, int> Employe::getEmployeeCountBySpecialite() {
+    QMap<QString, int> specialiteCounts;
+    QSqlQuery query("SELECT specialite, COUNT(*) FROM employe GROUP BY specialite");
+
+    while (query.next()) {
+        QString specialite = query.value(0).toString();
+        int count = query.value(1).toInt();
+        specialiteCounts[specialite] = count;
+    }
+
+    return specialiteCounts;
 }

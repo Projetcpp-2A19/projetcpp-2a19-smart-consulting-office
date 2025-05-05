@@ -1,6 +1,5 @@
 <RCC>
-    <qresource prefix="/"/>
-    <qresource prefix="/images">
-        <file>images/ucl.jpg</file>
+    <qresource prefix="/">
+        <file>icons/notification_icon.png</file>
     </qresource>
 </RCC>
