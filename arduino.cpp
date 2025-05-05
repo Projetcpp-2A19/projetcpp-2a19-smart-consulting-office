@@ -19,7 +19,7 @@ QSerialPort *Arduino::getserial()
 }
 int Arduino::connect_arduino() {
     qDebug() << "=== Connection Attempt ===";
-
+    //Loops through all available serial ports.
     foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
         qDebug() << "Found port:" << info.portName();
         qDebug() << "VID:" << info.vendorIdentifier();
@@ -36,6 +36,7 @@ int Arduino::connect_arduino() {
     if(arduino_is_available) {
         serial->setPortName(arduino_port_name);
         if(serial->open(QIODevice::ReadWrite)) {
+            //Opens the port in both read and write mode.
             serial->setBaudRate(QSerialPort::Baud9600);
             serial->setDataBits(QSerialPort::Data8);
             serial->setParity(QSerialPort::NoParity);

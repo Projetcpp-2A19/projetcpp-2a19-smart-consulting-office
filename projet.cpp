@@ -51,19 +51,14 @@ bool Projet::ajouter() {
     }
     return true;
 }
-
 QSqlQueryModel* Projet::afficher() {
     QSqlQueryModel *model = new QSqlQueryModel();
     model->setQuery("SELECT ID_PROJET, NOM_PROJET, DESCRIPTION, "
                     "TO_CHAR(DATE_DEBUT, 'YYYY-MM-DD'), "
                     "TO_CHAR(DATE_FIN, 'YYYY-MM-DD'), "
                     "STATUS, PRIORITE, BUDGET, "
-                    "ID_EMPLOYE, ID_CLIENT "
+                    "ID_EMPLOYE, ID_CLIENT "  // NO PROGRESS HERE
                     "FROM PROJET");
-
-    if(model->lastError().isValid()) {
-        qDebug() << "Error loading projects:" << model->lastError().text();
-    }
     return model;
 }
 

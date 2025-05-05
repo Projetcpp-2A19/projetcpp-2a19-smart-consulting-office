@@ -21,6 +21,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsTextItem>
 #include <QGraphicsLineItem>
+#include "arduino.h"
 
 namespace Ui {
 class MainWindow;
@@ -62,7 +63,36 @@ private slots:
     void changeProjectPriority();
     void updateGanttChart();
     void changeProjectStatus(const QString &newStatus);
+    void on_connectArduino_clicked();
+    void on_setThreshold_clicked();
+    void updateTemperature();
 
+
+
+    void on_add_button_4_clicked();
+
+    void on_modifStadeButton_4_clicked();
+
+    void on_DeleteStadeButton_4_clicked();
+
+    void on_trier_Button_4_clicked();
+
+    void on_lineEdit_9_textChanged(const QString &arg1);
+
+    void on_tableViewEmploye_4_doubleClicked(const QModelIndex &index);
+
+    void on_pushButton_10_clicked();
+
+    void on_pushButton_11_clicked();
+
+    void on_pushButton_12_clicked();
+
+void initializeSpecialityComboBox();
+    void displaySpecialiteStats() ;
+
+void on_menu_employe_clicked();
+
+    void on_employe_go_to_menu_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -72,6 +102,10 @@ private:
     QTableView *trackingTableView;
     QChartView *chartView;
     QGraphicsScene *ganttScene;
+    Arduino arduino;
+    QTimer *temperatureTimer;
+    float currentThreshold;
+    int currentProjectId;
 
     void updateProjectView();
     void exportTableToPDF();
@@ -107,6 +141,18 @@ private:
      void adjustViewToContent(int contentHeight);
      void drawSimplifiedDayHeader(const QDate &today, int dayWidth, int yPos);
 
+
+     //gestion employe
+     int currentUserId;
+     QString currentUserName;
+     QString currentUserRole;
+     QString generateVerificationCode();
+     bool sendResetEmail(const QString &email, const QString &name, const QString &code);
+     void loginFailed();
+     void showPasswordChangeNotification();
+
+     Arduino A;
+     QTimer* Atimer;
 
 };
 
