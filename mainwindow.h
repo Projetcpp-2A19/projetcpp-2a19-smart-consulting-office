@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include<QSerialPort>
+#include<QSerialPortInfo>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -16,7 +17,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+public slots:
+void readarduino();
 private slots:
     void on_pushButton_addClient_clicked();
     void on_pushButton_deleteClient_clicked();
@@ -35,6 +37,9 @@ private slots:
 private:
     int m_currentClientId;
     bool m_editMode;
+    QSerialPort *serialPort;
+    QByteArray serialData;
+    QString serialbuffer;
 
 private:
     Ui::MainWindow *ui;
