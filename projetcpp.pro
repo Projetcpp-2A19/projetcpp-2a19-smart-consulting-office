@@ -29,20 +29,24 @@ CONFIG += c++11
 SOURCES += \
     arduino.cpp \
     client.cpp \
+    consultant.cpp \
     employe.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
     projet.cpp \
+    sms.cpp \
     smtpclient.cpp
 
 HEADERS += \
     arduino.h \
     client.h \
+    consultant.h \
     employe.h \
         mainwindow.h \
     connection.h \
     projet.h \
+    sms.h \
     smtpclient.h
 
 FORMS += \

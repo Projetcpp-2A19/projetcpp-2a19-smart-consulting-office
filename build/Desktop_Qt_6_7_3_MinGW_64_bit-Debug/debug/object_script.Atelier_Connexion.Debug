@@ -1,10 +1,13 @@
 debug/arduino.o
 debug/client.o
+debug/consultant.o
 debug/employe.o
 debug/main.o
 debug/mainwindow.o
 debug/connection.o
 debug/projet.o
+debug/sms.o
 debug/smtpclient.o
 debug/moc_mainwindow.o
+debug/moc_sms.o
 debug/moc_smtpclient.o

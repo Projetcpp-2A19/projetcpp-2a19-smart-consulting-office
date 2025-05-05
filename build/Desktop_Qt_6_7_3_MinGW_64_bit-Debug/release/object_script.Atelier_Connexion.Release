@@ -1,10 +1,13 @@
 release/arduino.o
 release/client.o
+release/consultant.o
 release/employe.o
 release/main.o
 release/mainwindow.o
 release/connection.o
 release/projet.o
+release/sms.o
 release/smtpclient.o
 release/moc_mainwindow.o
+release/moc_sms.o
 release/moc_smtpclient.o

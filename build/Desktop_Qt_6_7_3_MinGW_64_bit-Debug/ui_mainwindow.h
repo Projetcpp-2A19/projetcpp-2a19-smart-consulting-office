@@ -186,6 +186,46 @@ public:
     QWidget *tab_5;
     QGroupBox *groupBox_13;
     QLabel *bg_client;
+    QGroupBox *gestion_consultant;
+    QLabel *bg_projet_2;
+    QGroupBox *groupBox_19;
+    QGroupBox *groupBox_20;
+    QLabel *label_74;
+    QTableView *consultantTable;
+    QLabel *label_75;
+    QLineEdit *chercherconsultqntlineedit;
+    QLabel *label_76;
+    QRadioButton *tricroiradiobutton;
+    QRadioButton *tridecroiradiobutton;
+    QPushButton *supprierconsultqntpushbutton;
+    QPushButton *odifyconsultant;
+    QPushButton *exportpdfbutton;
+    QPushButton *statistiquepushbutton;
+    QWidget *staticWidget;
+    QPushButton *hidepushbutton;
+    QPushButton *sendsms;
+    QLineEdit *numerolineedit;
+    QLineEdit *textsms;
+    QLabel *label_77;
+    QLabel *label_78;
+    QPushButton *fanOnButton;
+    QPushButton *fanOffButton;
+    QLabel *fanStatusLabel;
+    QLineEdit *temperatureLineEdit;
+    QPushButton *tempButton;
+    QGroupBox *groupBox_21;
+    QLabel *label_79;
+    QLineEdit *lineEdit_ID;
+    QLineEdit *lineEdit_Nom;
+    QLineEdit *lineEdit_Prenom;
+    QLineEdit *lineEdit_Telephone;
+    QLabel *label_80;
+    QLabel *label_81;
+    QLabel *label_82;
+    QPushButton *QJOUTERCONSULTQNTBUTTON;
+    QPushButton *pushButton_14;
+    QLabel *label_83;
+    QDateEdit *dateAjoutLineEdit;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -1488,11 +1528,299 @@ public:
         bg_client->setStyleSheet(QString::fromUtf8("background-color:white;"));
         bg_client->raise();
         tabWidget_2->raise();
+        gestion_consultant = new QGroupBox(centralWidget);
+        gestion_consultant->setObjectName("gestion_consultant");
+        gestion_consultant->setGeometry(QRect(0, 0, 1920, 1080));
+        bg_projet_2 = new QLabel(gestion_consultant);
+        bg_projet_2->setObjectName("bg_projet_2");
+        bg_projet_2->setGeometry(QRect(0, 0, 1920, 1080));
+        bg_projet_2->setStyleSheet(QString::fromUtf8("background-color:white;"));
+        groupBox_19 = new QGroupBox(gestion_consultant);
+        groupBox_19->setObjectName("groupBox_19");
+        groupBox_19->setGeometry(QRect(10, 30, 1331, 691));
+        groupBox_19->setStyleSheet(QString::fromUtf8("QGroupBox {\n"
+"    border: 2px solid #3498db;\n"
+"    border-radius: 10px;\n"
+"    margin-top: 10px;\n"
+"    font-weight: bold;\n"
+"    font-size: 14px;\n"
+"    padding: 10px;\n"
+"background-color:white;\n"
+"\n"
+"}\n"
+"QGroupBox::title {\n"
+"    subcontrol-origin: margin;\n"
+"    subcontrol-position: top left;\n"
+"    padding: 5px 10px;\n"
+"    color: #3498db;\n"
+"}"));
+        groupBox_20 = new QGroupBox(groupBox_19);
+        groupBox_20->setObjectName("groupBox_20");
+        groupBox_20->setEnabled(true);
+        groupBox_20->setGeometry(QRect(580, 20, 741, 641));
+        groupBox_20->setStyleSheet(QString::fromUtf8("\n"
+"QGroupBox {\n"
+"    border: 2px solid #3498db;\n"
+"    border-radius: 10px;\n"
+"    margin-top: 10px;\n"
+"    font-weight: bold;\n"
+"    font-size: 14px;\n"
+"    padding: 10px;\n"
+"}\n"
+"QGroupBox::title {\n"
+"    subcontrol-origin: margin;\n"
+"    subcontrol-position: top left;\n"
+"    padding: 5px 10px;\n"
+"    color: #3498db;\n"
+"}"));
+        label_74 = new QLabel(groupBox_20);
+        label_74->setObjectName("label_74");
+        label_74->setGeometry(QRect(20, 40, 151, 20));
+        consultantTable = new QTableView(groupBox_20);
+        consultantTable->setObjectName("consultantTable");
+        consultantTable->setGeometry(QRect(200, 90, 521, 211));
+        label_75 = new QLabel(groupBox_20);
+        label_75->setObjectName("label_75");
+        label_75->setGeometry(QRect(180, 40, 101, 20));
+        chercherconsultqntlineedit = new QLineEdit(groupBox_20);
+        chercherconsultqntlineedit->setObjectName("chercherconsultqntlineedit");
+        chercherconsultqntlineedit->setGeometry(QRect(270, 40, 113, 26));
+        label_76 = new QLabel(groupBox_20);
+        label_76->setObjectName("label_76");
+        label_76->setGeometry(QRect(420, 40, 81, 20));
+        tricroiradiobutton = new QRadioButton(groupBox_20);
+        tricroiradiobutton->setObjectName("tricroiradiobutton");
+        tricroiradiobutton->setGeometry(QRect(520, 20, 110, 24));
+        tridecroiradiobutton = new QRadioButton(groupBox_20);
+        tridecroiradiobutton->setObjectName("tridecroiradiobutton");
+        tridecroiradiobutton->setGeometry(QRect(520, 60, 110, 24));
+        supprierconsultqntpushbutton = new QPushButton(groupBox_20);
+        supprierconsultqntpushbutton->setObjectName("supprierconsultqntpushbutton");
+        supprierconsultqntpushbutton->setGeometry(QRect(30, 100, 93, 29));
+        supprierconsultqntpushbutton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}"));
+        odifyconsultant = new QPushButton(groupBox_20);
+        odifyconsultant->setObjectName("odifyconsultant");
+        odifyconsultant->setGeometry(QRect(30, 150, 93, 29));
+        odifyconsultant->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        exportpdfbutton = new QPushButton(groupBox_20);
+        exportpdfbutton->setObjectName("exportpdfbutton");
+        exportpdfbutton->setGeometry(QRect(30, 200, 141, 29));
+        exportpdfbutton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}"));
+        statistiquepushbutton = new QPushButton(groupBox_20);
+        statistiquepushbutton->setObjectName("statistiquepushbutton");
+        statistiquepushbutton->setGeometry(QRect(30, 260, 141, 29));
+        statistiquepushbutton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}"));
+        staticWidget = new QWidget(groupBox_20);
+        staticWidget->setObjectName("staticWidget");
+        staticWidget->setGeometry(QRect(20, 310, 701, 271));
+        hidepushbutton = new QPushButton(groupBox_20);
+        hidepushbutton->setObjectName("hidepushbutton");
+        hidepushbutton->setGeometry(QRect(640, 600, 93, 31));
+        hidepushbutton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}"));
+        label_74->raise();
+        label_75->raise();
+        label_76->raise();
+        staticWidget->raise();
+        chercherconsultqntlineedit->raise();
+        tricroiradiobutton->raise();
+        tridecroiradiobutton->raise();
+        supprierconsultqntpushbutton->raise();
+        odifyconsultant->raise();
+        exportpdfbutton->raise();
+        consultantTable->raise();
+        statistiquepushbutton->raise();
+        hidepushbutton->raise();
+        sendsms = new QPushButton(groupBox_19);
+        sendsms->setObjectName("sendsms");
+        sendsms->setGeometry(QRect(200, 620, 93, 29));
+        sendsms->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}"));
+        numerolineedit = new QLineEdit(groupBox_19);
+        numerolineedit->setObjectName("numerolineedit");
+        numerolineedit->setGeometry(QRect(200, 580, 113, 26));
+        textsms = new QLineEdit(groupBox_19);
+        textsms->setObjectName("textsms");
+        textsms->setGeometry(QRect(90, 470, 251, 91));
+        label_77 = new QLabel(groupBox_19);
+        label_77->setObjectName("label_77");
+        label_77->setGeometry(QRect(20, 580, 191, 20));
+        label_78 = new QLabel(groupBox_19);
+        label_78->setObjectName("label_78");
+        label_78->setGeometry(QRect(20, 490, 191, 20));
+        fanOnButton = new QPushButton(groupBox_19);
+        fanOnButton->setObjectName("fanOnButton");
+        fanOnButton->setGeometry(QRect(400, 380, 151, 29));
+        fanOffButton = new QPushButton(groupBox_19);
+        fanOffButton->setObjectName("fanOffButton");
+        fanOffButton->setGeometry(QRect(410, 420, 141, 29));
+        fanStatusLabel = new QLabel(groupBox_19);
+        fanStatusLabel->setObjectName("fanStatusLabel");
+        fanStatusLabel->setGeometry(QRect(410, 500, 141, 31));
+        temperatureLineEdit = new QLineEdit(groupBox_19);
+        temperatureLineEdit->setObjectName("temperatureLineEdit");
+        temperatureLineEdit->setGeometry(QRect(420, 460, 113, 26));
+        tempButton = new QPushButton(groupBox_19);
+        tempButton->setObjectName("tempButton");
+        tempButton->setGeometry(QRect(450, 540, 93, 29));
+        groupBox_21 = new QGroupBox(gestion_consultant);
+        groupBox_21->setObjectName("groupBox_21");
+        groupBox_21->setGeometry(QRect(90, 20, 491, 371));
+        groupBox_21->setStyleSheet(QString::fromUtf8("QGroupBox {\n"
+"    border: 2px solid #3498db;\n"
+"    border-radius: 10px;\n"
+"    margin-top: 10px;\n"
+"    font-weight: bold;\n"
+"    font-size: 14px;\n"
+"    padding: 10px;\n"
+"}\n"
+"QGroupBox::title {\n"
+"    subcontrol-origin: margin;\n"
+"    subcontrol-position: top left;\n"
+"    padding: 5px 10px;\n"
+"    color: #3498db;\n"
+"}"));
+        label_79 = new QLabel(groupBox_21);
+        label_79->setObjectName("label_79");
+        label_79->setGeometry(QRect(40, 30, 121, 16));
+        lineEdit_ID = new QLineEdit(groupBox_21);
+        lineEdit_ID->setObjectName("lineEdit_ID");
+        lineEdit_ID->setGeometry(QRect(30, 50, 181, 31));
+        lineEdit_Nom = new QLineEdit(groupBox_21);
+        lineEdit_Nom->setObjectName("lineEdit_Nom");
+        lineEdit_Nom->setGeometry(QRect(30, 130, 181, 31));
+        lineEdit_Prenom = new QLineEdit(groupBox_21);
+        lineEdit_Prenom->setObjectName("lineEdit_Prenom");
+        lineEdit_Prenom->setGeometry(QRect(280, 130, 191, 31));
+        lineEdit_Telephone = new QLineEdit(groupBox_21);
+        lineEdit_Telephone->setObjectName("lineEdit_Telephone");
+        lineEdit_Telephone->setGeometry(QRect(30, 220, 191, 31));
+        label_80 = new QLabel(groupBox_21);
+        label_80->setObjectName("label_80");
+        label_80->setGeometry(QRect(30, 100, 201, 20));
+        label_81 = new QLabel(groupBox_21);
+        label_81->setObjectName("label_81");
+        label_81->setGeometry(QRect(280, 100, 63, 20));
+        label_82 = new QLabel(groupBox_21);
+        label_82->setObjectName("label_82");
+        label_82->setGeometry(QRect(30, 190, 191, 20));
+        QJOUTERCONSULTQNTBUTTON = new QPushButton(groupBox_21);
+        QJOUTERCONSULTQNTBUTTON->setObjectName("QJOUTERCONSULTQNTBUTTON");
+        QJOUTERCONSULTQNTBUTTON->setGeometry(QRect(270, 330, 93, 29));
+        QJOUTERCONSULTQNTBUTTON->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}"));
+        QJOUTERCONSULTQNTBUTTON->setAutoDefault(false);
+        QJOUTERCONSULTQNTBUTTON->setFlat(false);
+        pushButton_14 = new QPushButton(groupBox_21);
+        pushButton_14->setObjectName("pushButton_14");
+        pushButton_14->setGeometry(QRect(90, 330, 93, 29));
+        pushButton_14->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}"));
+        label_83 = new QLabel(groupBox_21);
+        label_83->setObjectName("label_83");
+        label_83->setGeometry(QRect(280, 190, 63, 20));
+        dateAjoutLineEdit = new QDateEdit(groupBox_21);
+        dateAjoutLineEdit->setObjectName("dateAjoutLineEdit");
+        dateAjoutLineEdit->setGeometry(QRect(280, 230, 161, 26));
         MainWindow->setCentralWidget(centralWidget);
         gestion_employe->raise();
-        menu->raise();
         gestion_projet->raise();
         gestion_client->raise();
+        gestion_consultant->raise();
+        menu->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
         menuBar->setGeometry(QRect(0, 0, 2070, 26));
@@ -1509,6 +1837,7 @@ public:
         tabWidget->setCurrentIndex(2);
         stackedWidget_4->setCurrentIndex(0);
         tabWidget_2->setCurrentIndex(1);
+        QJOUTERCONSULTQNTBUTTON->setDefault(true);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1623,6 +1952,35 @@ public:
         groupBox_13->setTitle(QCoreApplication::translate("MainWindow", "Statistique", nullptr));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Statistique ", nullptr));
         bg_client->setText(QString());
+        gestion_consultant->setTitle(QString());
+        bg_projet_2->setText(QString());
+        groupBox_19->setTitle(QCoreApplication::translate("MainWindow", "gestion des consultants:", nullptr));
+        groupBox_20->setTitle(QCoreApplication::translate("MainWindow", "gestion de liste des consultants :", nullptr));
+        label_74->setText(QCoreApplication::translate("MainWindow", "liste des consultants:", nullptr));
+        label_75->setText(QCoreApplication::translate("MainWindow", "rechercher:", nullptr));
+        label_76->setText(QCoreApplication::translate("MainWindow", "trier par id :", nullptr));
+        tricroiradiobutton->setText(QCoreApplication::translate("MainWindow", "croissant", nullptr));
+        tridecroiradiobutton->setText(QCoreApplication::translate("MainWindow", "decroissant", nullptr));
+        supprierconsultqntpushbutton->setText(QCoreApplication::translate("MainWindow", "supprimer", nullptr));
+        odifyconsultant->setText(QCoreApplication::translate("MainWindow", "modifier", nullptr));
+        exportpdfbutton->setText(QCoreApplication::translate("MainWindow", "exporter en pdf", nullptr));
+        statistiquepushbutton->setText(QCoreApplication::translate("MainWindow", "Statistique", nullptr));
+        hidepushbutton->setText(QCoreApplication::translate("MainWindow", "hide", nullptr));
+        sendsms->setText(QCoreApplication::translate("MainWindow", "send", nullptr));
+        label_77->setText(QCoreApplication::translate("MainWindow", "numero de telephone :", nullptr));
+        label_78->setText(QCoreApplication::translate("MainWindow", "sms :", nullptr));
+        fanOnButton->setText(QCoreApplication::translate("MainWindow", "fanOnButton", nullptr));
+        fanOffButton->setText(QCoreApplication::translate("MainWindow", "fanOffButton", nullptr));
+        fanStatusLabel->setText(QCoreApplication::translate("MainWindow", "fanStatusLabel", nullptr));
+        tempButton->setText(QCoreApplication::translate("MainWindow", "temp", nullptr));
+        groupBox_21->setTitle(QCoreApplication::translate("MainWindow", "ajouter un consultant", nullptr));
+        label_79->setText(QCoreApplication::translate("MainWindow", "id du consultant: ", nullptr));
+        label_80->setText(QCoreApplication::translate("MainWindow", "donner le nom du consultant:", nullptr));
+        label_81->setText(QCoreApplication::translate("MainWindow", "prenom:", nullptr));
+        label_82->setText(QCoreApplication::translate("MainWindow", "numero de telephone :", nullptr));
+        QJOUTERCONSULTQNTBUTTON->setText(QCoreApplication::translate("MainWindow", "ajouter ", nullptr));
+        pushButton_14->setText(QCoreApplication::translate("MainWindow", "annuler", nullptr));
+        label_83->setText(QCoreApplication::translate("MainWindow", "date", nullptr));
     } // retranslateUi
 
 };

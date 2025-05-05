@@ -23,6 +23,29 @@
 #include <QGraphicsLineItem>
 #include "arduino.h"
 
+
+
+#include  <QSqlTableModel>
+#include  <QSortFilterProxyModel>
+#include  <QString>
+#include  <QFileDialog>
+#include  <QPdfWriter>
+#include <QtCharts/QBarSet>
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QChart>
+#include <QtCharts/QChartView>
+#include <QtCharts/QBarCategoryAxis>
+#include <QtCharts/QValueAxis>
+#include  <QVBoxLayout>
+#include "sms.h"
+
+#include <QTimer>
+#include <QSqlQuery>
+#include <QSqlDatabase>
+
+#include "consultant.h"
+
+#include <QRandomGenerator>
 namespace Ui {
 class MainWindow;
 }
@@ -118,6 +141,56 @@ void on_menu_employe_clicked();
 
     void on_menu_client_clicked();
 
+
+
+    //gestion consultant
+
+    void checkTemperature();
+    void on_temperatureLineEdit_editingFinished();
+    void on_tempButton_clicked();
+    void on_fanOnButton_clicked();
+    void on_fanOffButton_clicked();
+    void on_QJOUTERCONSULTQNTBUTTON_clicked();
+
+
+
+    void on_supprierconsultqntpushbutton_clicked();
+
+
+    void on_odifyconsultant_clicked();
+
+    void on_consultantTable_clicked(const QModelIndex &index);
+
+    void on_searchConsultantByTyping(const QString &searchText);
+
+
+
+    void on_tricroiradiobutton_clicked();
+
+    void on_tridecroiradiobutton_clicked();
+
+    void on_exportpdfbutton_clicked();
+
+    void on_statistiquepushbutton_clicked();
+
+    void on_hidepushbutton_clicked();
+
+    void on_sendsms_clicked();
+
+    void on_historiqueButton_clicked();
+
+
+    void on_menu_consultant_clicked();
+
+    void on_consultant_go_to_menu_clicked();
+
+private:
+    void initializeConsultantTableModel() ;
+    void afficherHistorique();
+
+
+
+
 private:
     Ui::MainWindow *ui;
     QSqlQueryModel *employeModel;
@@ -186,6 +259,16 @@ private:
      QSerialPort *serialPort;
      QByteArray serialData;
      QString serialbuffer;
+
+     //gestion consultant
+     QSqlQueryModel *consultantModel;
+     QSqlTableModel*consultantTableModel;
+    // QTimer *temperatureTimer;
+     QSqlDatabase db;
+     QSortFilterProxyModel* consultantProxyModel;
+ public:
+     SmsSender*sarah;
+     //Arduino arduino;
 
 
 };
