@@ -1,0 +1,10 @@
+debug/arduino.o
+debug/client.o
+debug/employe.o
+debug/main.o
+debug/mainwindow.o
+debug/connection.o
+debug/projet.o
+debug/smtpclient.o
+debug/moc_mainwindow.o
+debug/moc_smtpclient.o

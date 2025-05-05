@@ -94,6 +94,30 @@ void on_menu_employe_clicked();
 
     void on_employe_go_to_menu_clicked();
 
+
+
+    //gestion client
+
+
+
+    void on_pushButton_addClient_clicked();
+    void on_pushButton_deleteClient_clicked();
+    void on_pushButton_updateClient_clicked();
+    void on_pushButton_cancel_clicked();
+    void on_pushButton_pdf_clicked();
+    void on_pushButton_notify_clicked();
+    void on_lineEdit_searchEmail_textChanged(const QString &arg1);
+    void on_pushButton_sortByName_clicked();
+    void on_pushButton_sortByCin_clicked();
+    void on_pushButton_actualiser_clicked();
+    void on_pushButton_statistique_clicked();
+    void on_pushButton_backup_clicked();
+
+
+    void on_projet_go_to_menu_clicked();
+
+    void on_menu_client_clicked();
+
 private:
     Ui::MainWindow *ui;
     QSqlQueryModel *employeModel;
@@ -150,9 +174,19 @@ private:
      bool sendResetEmail(const QString &email, const QString &name, const QString &code);
      void loginFailed();
      void showPasswordChangeNotification();
+     void readarduino();
 
      Arduino A;
      QTimer* Atimer;
+
+
+     //gestion client*
+     int m_currentClientId;
+     bool m_editMode;
+     QSerialPort *serialPort;
+     QByteArray serialData;
+     QString serialbuffer;
+
 
 };
 
