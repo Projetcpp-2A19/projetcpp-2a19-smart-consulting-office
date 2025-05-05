@@ -25,6 +25,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
@@ -213,6 +214,7 @@ public:
     QLabel *fanStatusLabel;
     QLineEdit *temperatureLineEdit;
     QPushButton *tempButton;
+    QPushButton *consultant_go_to_menu;
     QGroupBox *groupBox_21;
     QLabel *label_79;
     QLineEdit *lineEdit_ID;
@@ -226,6 +228,51 @@ public:
     QPushButton *pushButton_14;
     QLabel *label_83;
     QDateEdit *dateAjoutLineEdit;
+    QGroupBox *gestion_reclamation;
+    QTabWidget *tabWidget_3;
+    QWidget *Projects_2;
+    QGroupBox *groupBox_2;
+    QComboBox *priorite_reclamation;
+    QLabel *label_12;
+    QPushButton *bt_ajouter_reclamation;
+    QDateEdit *date_reclamation;
+    QLabel *label_13;
+    QWidget *layoutWidget_2;
+    QVBoxLayout *verticalLayout_5;
+    QLabel *label_14;
+    QLineEdit *id_reclamation;
+    QLabel *label_16;
+    QLineEdit *description_reclamation;
+    QLabel *label_17;
+    QLineEdit *resolution_reclamation;
+    QPushButton *bt_modifier_reclamation;
+    QLabel *label_18;
+    QComboBox *etat_reclamation;
+    QLabel *label_19;
+    QComboBox *nom_client_reclamation;
+    QLabel *label_pic_2;
+    QGroupBox *groupBox_7;
+    QTableView *tableView_reclamation;
+    QSplitter *splitter_6;
+    QPushButton *pushButton_9;
+    QPushButton *bt_supprimier_reclamation;
+    QLabel *label_20;
+    QWidget *verticalLayoutWidget_5;
+    QVBoxLayout *verticalLayout_2;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QLineEdit *lineEdit_envoyer_chatbot;
+    QPushButton *bt_generate;
+    QTextEdit *textEdit_text_chat;
+    QLineEdit *chercher_text;
+    QLabel *label_21;
+    QComboBox *id_supprimer_reclamation;
+    QPushButton *bt_trier;
+    QComboBox *comboBox_ordre;
+    QComboBox *comboBox_choix;
+    QPushButton *reclamation_go_to_menu;
+    QWidget *tab_6;
+    QLabel *label_stat;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -1734,6 +1781,22 @@ public:
         tempButton = new QPushButton(groupBox_19);
         tempButton->setObjectName("tempButton");
         tempButton->setGeometry(QRect(450, 540, 93, 29));
+        consultant_go_to_menu = new QPushButton(groupBox_19);
+        consultant_go_to_menu->setObjectName("consultant_go_to_menu");
+        consultant_go_to_menu->setGeometry(QRect(10, 650, 93, 29));
+        consultant_go_to_menu->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}"));
         groupBox_21 = new QGroupBox(gestion_consultant);
         groupBox_21->setObjectName("groupBox_21");
         groupBox_21->setGeometry(QRect(90, 20, 491, 371));
@@ -1815,12 +1878,551 @@ public:
         dateAjoutLineEdit = new QDateEdit(groupBox_21);
         dateAjoutLineEdit->setObjectName("dateAjoutLineEdit");
         dateAjoutLineEdit->setGeometry(QRect(280, 230, 161, 26));
+        gestion_reclamation = new QGroupBox(centralWidget);
+        gestion_reclamation->setObjectName("gestion_reclamation");
+        gestion_reclamation->setGeometry(QRect(0, 0, 1920, 1080));
+        gestion_reclamation->setStyleSheet(QString::fromUtf8("background-color:white;"));
+        tabWidget_3 = new QTabWidget(gestion_reclamation);
+        tabWidget_3->setObjectName("tabWidget_3");
+        tabWidget_3->setGeometry(QRect(30, 20, 1241, 661));
+        tabWidget_3->setStyleSheet(QString::fromUtf8("QTabWidget::pane {\n"
+"    border: 2px solid #3498db; /* Bordure autour du widget */\n"
+"    background: white;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"\n"
+"QTabBar::tab {\n"
+"    background: #ecf0f1; /* Fond gris clair */\n"
+"    border: 2px solid #bdc3c7;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"    color: #2c3e50; /* Gris fonc\303\251 */\n"
+"}\n"
+"\n"
+"QTabBar::tab:selected {\n"
+"    background: #3498db; /* Bleu pour l'onglet actif */\n"
+"    color: white;\n"
+"    border: 2px solid #2980b9;\n"
+"}\n"
+"\n"
+"QTabBar::tab:hover {\n"
+"    background: #5dade2; /* Bleu clair au survol */\n"
+"}\n"
+""));
+        Projects_2 = new QWidget();
+        Projects_2->setObjectName("Projects_2");
+        groupBox_2 = new QGroupBox(Projects_2);
+        groupBox_2->setObjectName("groupBox_2");
+        groupBox_2->setGeometry(QRect(10, 30, 291, 581));
+        groupBox_2->setStyleSheet(QString::fromUtf8("QGroupBox {\n"
+"    border: 2px solid #3498db;\n"
+"    border-radius: 10px;\n"
+"    margin-top: 10px;\n"
+"    font-weight: bold;\n"
+"    font-size: 14px;\n"
+"    padding: 10px;\n"
+"}\n"
+"QGroupBox::title {\n"
+"    subcontrol-origin: margin;\n"
+"    subcontrol-position: top left;\n"
+"    padding: 5px 10px;\n"
+"    color: #3498db;\n"
+"}\n"
+""));
+        priorite_reclamation = new QComboBox(groupBox_2);
+        priorite_reclamation->addItem(QString());
+        priorite_reclamation->addItem(QString());
+        priorite_reclamation->addItem(QString());
+        priorite_reclamation->setObjectName("priorite_reclamation");
+        priorite_reclamation->setGeometry(QRect(140, 320, 86, 26));
+        priorite_reclamation->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        label_12 = new QLabel(groupBox_2);
+        label_12->setObjectName("label_12");
+        label_12->setGeometry(QRect(20, 320, 73, 25));
+        label_12->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color: #2c3e50; /* Gris fonc\303\251 */\n"
+"    padding: 3px;\n"
+"}\n"
+""));
+        bt_ajouter_reclamation = new QPushButton(groupBox_2);
+        bt_ajouter_reclamation->setObjectName("bt_ajouter_reclamation");
+        bt_ajouter_reclamation->setGeometry(QRect(30, 530, 91, 31));
+        bt_ajouter_reclamation->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        date_reclamation = new QDateEdit(groupBox_2);
+        date_reclamation->setObjectName("date_reclamation");
+        date_reclamation->setGeometry(QRect(130, 360, 121, 31));
+        date_reclamation->setStyleSheet(QString::fromUtf8("QDateEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"    font-size: 14px;\n"
+"    background-color: #f9f9f9;\n"
+"}\n"
+"QDateEdit::drop-down {\n"
+"    border: none;\n"
+"}\n"
+"\n"
+""));
+        label_13 = new QLabel(groupBox_2);
+        label_13->setObjectName("label_13");
+        label_13->setGeometry(QRect(20, 360, 95, 31));
+        label_13->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color: #2c3e50; /* Gris fonc\303\251 */\n"
+"    padding: 3px;\n"
+"}\n"
+""));
+        layoutWidget_2 = new QWidget(groupBox_2);
+        layoutWidget_2->setObjectName("layoutWidget_2");
+        layoutWidget_2->setGeometry(QRect(23, 41, 251, 269));
+        verticalLayout_5 = new QVBoxLayout(layoutWidget_2);
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_5->setObjectName("verticalLayout_5");
+        verticalLayout_5->setContentsMargins(0, 0, 0, 0);
+        label_14 = new QLabel(layoutWidget_2);
+        label_14->setObjectName("label_14");
+        label_14->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color: #2c3e50; /* Gris fonc\303\251 */\n"
+"    padding: 3px;\n"
+"}\n"
+""));
+
+        verticalLayout_5->addWidget(label_14);
+
+        id_reclamation = new QLineEdit(layoutWidget_2);
+        id_reclamation->setObjectName("id_reclamation");
+        id_reclamation->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"    font-size: 14px;\n"
+"    background-color: #f9f9f9;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid #3498db;\n"
+"    background-color: white;\n"
+"}\n"
+""));
+
+        verticalLayout_5->addWidget(id_reclamation);
+
+        label_16 = new QLabel(layoutWidget_2);
+        label_16->setObjectName("label_16");
+        label_16->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color: #2c3e50; /* Gris fonc\303\251 */\n"
+"    padding: 3px;\n"
+"}\n"
+""));
+
+        verticalLayout_5->addWidget(label_16);
+
+        description_reclamation = new QLineEdit(layoutWidget_2);
+        description_reclamation->setObjectName("description_reclamation");
+        description_reclamation->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"    font-size: 14px;\n"
+"    background-color: #f9f9f9;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid #3498db;\n"
+"    background-color: white;\n"
+"}\n"
+""));
+
+        verticalLayout_5->addWidget(description_reclamation);
+
+        label_17 = new QLabel(layoutWidget_2);
+        label_17->setObjectName("label_17");
+        label_17->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color: #2c3e50; /* Gris fonc\303\251 */\n"
+"    padding: 3px;\n"
+"}\n"
+""));
+
+        verticalLayout_5->addWidget(label_17);
+
+        resolution_reclamation = new QLineEdit(layoutWidget_2);
+        resolution_reclamation->setObjectName("resolution_reclamation");
+        resolution_reclamation->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"    font-size: 14px;\n"
+"    background-color: #f9f9f9;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid #3498db;\n"
+"    background-color: white;\n"
+"}\n"
+""));
+
+        verticalLayout_5->addWidget(resolution_reclamation);
+
+        bt_modifier_reclamation = new QPushButton(groupBox_2);
+        bt_modifier_reclamation->setObjectName("bt_modifier_reclamation");
+        bt_modifier_reclamation->setGeometry(QRect(150, 530, 91, 31));
+        bt_modifier_reclamation->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        label_18 = new QLabel(groupBox_2);
+        label_18->setObjectName("label_18");
+        label_18->setGeometry(QRect(20, 400, 95, 31));
+        label_18->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color: #2c3e50; /* Gris fonc\303\251 */\n"
+"    padding: 3px;\n"
+"}\n"
+""));
+        etat_reclamation = new QComboBox(groupBox_2);
+        etat_reclamation->addItem(QString());
+        etat_reclamation->addItem(QString());
+        etat_reclamation->addItem(QString());
+        etat_reclamation->setObjectName("etat_reclamation");
+        etat_reclamation->setGeometry(QRect(130, 400, 86, 26));
+        etat_reclamation->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        label_19 = new QLabel(groupBox_2);
+        label_19->setObjectName("label_19");
+        label_19->setGeometry(QRect(20, 450, 95, 31));
+        label_19->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color: #2c3e50; /* Gris fonc\303\251 */\n"
+"    padding: 3px;\n"
+"}\n"
+""));
+        nom_client_reclamation = new QComboBox(groupBox_2);
+        nom_client_reclamation->setObjectName("nom_client_reclamation");
+        nom_client_reclamation->setGeometry(QRect(140, 450, 86, 26));
+        nom_client_reclamation->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        label_pic_2 = new QLabel(Projects_2);
+        label_pic_2->setObjectName("label_pic_2");
+        label_pic_2->setGeometry(QRect(1130, -20, 111, 81));
+        groupBox_7 = new QGroupBox(Projects_2);
+        groupBox_7->setObjectName("groupBox_7");
+        groupBox_7->setGeometry(QRect(320, 30, 841, 581));
+        groupBox_7->setStyleSheet(QString::fromUtf8("QGroupBox {\n"
+"    border: 2px solid #3498db;\n"
+"    border-radius: 10px;\n"
+"    margin-top: 10px;\n"
+"    font-weight: bold;\n"
+"    font-size: 14px;\n"
+"    padding: 10px;\n"
+"}\n"
+"QGroupBox::title {\n"
+"    subcontrol-origin: margin;\n"
+"    subcontrol-position: top left;\n"
+"    padding: 5px 10px;\n"
+"    color: #3498db;\n"
+"}\n"
+""));
+        tableView_reclamation = new QTableView(groupBox_7);
+        tableView_reclamation->setObjectName("tableView_reclamation");
+        tableView_reclamation->setGeometry(QRect(30, 120, 611, 141));
+        tableView_reclamation->setStyleSheet(QString::fromUtf8("QTableView {\n"
+"    background-color: #f0f0f0;\n"
+"    border: 1px solid #dcdcdc;\n"
+"    font-size: 12px;\n"
+"    color: #333;\n"
+"    selection-background-color: #A3C1D1;\n"
+"    selection-color: white;\n"
+"}\n"
+"\n"
+"QTableView::item {\n"
+"    padding: 5px;\n"
+"    border-bottom: 1px solid #ddd;\n"
+"}\n"
+"\n"
+"QTableView::header {\n"
+"    background-color: #4CAF50;\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"}\n"
+""));
+        splitter_6 = new QSplitter(groupBox_7);
+        splitter_6->setObjectName("splitter_6");
+        splitter_6->setGeometry(QRect(480, 40, 341, 35));
+        splitter_6->setOrientation(Qt::Orientation::Horizontal);
+        pushButton_9 = new QPushButton(splitter_6);
+        pushButton_9->setObjectName("pushButton_9");
+        pushButton_9->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        splitter_6->addWidget(pushButton_9);
+        bt_supprimier_reclamation = new QPushButton(splitter_6);
+        bt_supprimier_reclamation->setObjectName("bt_supprimier_reclamation");
+        bt_supprimier_reclamation->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        splitter_6->addWidget(bt_supprimier_reclamation);
+        label_20 = new QLabel(groupBox_7);
+        label_20->setObjectName("label_20");
+        label_20->setGeometry(QRect(30, 440, 181, 31));
+        label_20->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color: #2c3e50; /* Gris fonc\303\251 */\n"
+"    padding: 3px;\n"
+"}\n"
+""));
+        verticalLayoutWidget_5 = new QWidget(groupBox_7);
+        verticalLayoutWidget_5->setObjectName("verticalLayoutWidget_5");
+        verticalLayoutWidget_5->setGeometry(QRect(230, 350, 431, 201));
+        verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_5);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        scrollArea = new QScrollArea(verticalLayoutWidget_5);
+        scrollArea->setObjectName("scrollArea");
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 427, 197));
+        lineEdit_envoyer_chatbot = new QLineEdit(scrollAreaWidgetContents);
+        lineEdit_envoyer_chatbot->setObjectName("lineEdit_envoyer_chatbot");
+        lineEdit_envoyer_chatbot->setGeometry(QRect(10, 160, 311, 41));
+        bt_generate = new QPushButton(scrollAreaWidgetContents);
+        bt_generate->setObjectName("bt_generate");
+        bt_generate->setGeometry(QRect(330, 160, 83, 29));
+        textEdit_text_chat = new QTextEdit(scrollAreaWidgetContents);
+        textEdit_text_chat->setObjectName("textEdit_text_chat");
+        textEdit_text_chat->setGeometry(QRect(0, 0, 431, 151));
+        scrollArea->setWidget(scrollAreaWidgetContents);
+
+        verticalLayout_2->addWidget(scrollArea);
+
+        chercher_text = new QLineEdit(groupBox_7);
+        chercher_text->setObjectName("chercher_text");
+        chercher_text->setGeometry(QRect(130, 44, 114, 31));
+        chercher_text->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"    font-size: 14px;\n"
+"    background-color: #f9f9f9;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid #3498db;\n"
+"    background-color: white;\n"
+"}\n"
+""));
+        label_21 = new QLabel(groupBox_7);
+        label_21->setObjectName("label_21");
+        label_21->setGeometry(QRect(30, 44, 94, 31));
+        label_21->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color: #2c3e50; /* Gris fonc\303\251 */\n"
+"    padding: 3px;\n"
+"}\n"
+""));
+        id_supprimer_reclamation = new QComboBox(groupBox_7);
+        id_supprimer_reclamation->setObjectName("id_supprimer_reclamation");
+        id_supprimer_reclamation->setGeometry(QRect(680, 120, 131, 26));
+        id_supprimer_reclamation->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        bt_trier = new QPushButton(groupBox_7);
+        bt_trier->setObjectName("bt_trier");
+        bt_trier->setGeometry(QRect(290, 80, 91, 31));
+        bt_trier->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        comboBox_ordre = new QComboBox(groupBox_7);
+        comboBox_ordre->addItem(QString());
+        comboBox_ordre->addItem(QString());
+        comboBox_ordre->setObjectName("comboBox_ordre");
+        comboBox_ordre->setGeometry(QRect(290, 40, 100, 26));
+        comboBox_ordre->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        comboBox_choix = new QComboBox(groupBox_7);
+        comboBox_choix->addItem(QString());
+        comboBox_choix->addItem(QString());
+        comboBox_choix->addItem(QString());
+        comboBox_choix->addItem(QString());
+        comboBox_choix->addItem(QString());
+        comboBox_choix->addItem(QString());
+        comboBox_choix->addItem(QString());
+        comboBox_choix->setObjectName("comboBox_choix");
+        comboBox_choix->setGeometry(QRect(110, 80, 141, 26));
+        comboBox_choix->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        reclamation_go_to_menu = new QPushButton(Projects_2);
+        reclamation_go_to_menu->setObjectName("reclamation_go_to_menu");
+        reclamation_go_to_menu->setGeometry(QRect(1100, 0, 91, 31));
+        reclamation_go_to_menu->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 14px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #1c5985;\n"
+"}\n"
+""));
+        tabWidget_3->addTab(Projects_2, QString());
+        tab_6 = new QWidget();
+        tab_6->setObjectName("tab_6");
+        label_stat = new QLabel(tab_6);
+        label_stat->setObjectName("label_stat");
+        label_stat->setGeometry(QRect(310, 180, 661, 441));
+        tabWidget_3->addTab(tab_6, QString());
         MainWindow->setCentralWidget(centralWidget);
         gestion_employe->raise();
-        gestion_projet->raise();
         gestion_client->raise();
         gestion_consultant->raise();
+        gestion_projet->raise();
         menu->raise();
+        gestion_reclamation->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
         menuBar->setGeometry(QRect(0, 0, 2070, 26));
@@ -1834,10 +2436,11 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(0);
         stackedWidget_4->setCurrentIndex(0);
         tabWidget_2->setCurrentIndex(1);
         QJOUTERCONSULTQNTBUTTON->setDefault(true);
+        tabWidget_3->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1973,6 +2576,7 @@ public:
         fanOffButton->setText(QCoreApplication::translate("MainWindow", "fanOffButton", nullptr));
         fanStatusLabel->setText(QCoreApplication::translate("MainWindow", "fanStatusLabel", nullptr));
         tempButton->setText(QCoreApplication::translate("MainWindow", "temp", nullptr));
+        consultant_go_to_menu->setText(QCoreApplication::translate("MainWindow", "Menu", nullptr));
         groupBox_21->setTitle(QCoreApplication::translate("MainWindow", "ajouter un consultant", nullptr));
         label_79->setText(QCoreApplication::translate("MainWindow", "id du consultant: ", nullptr));
         label_80->setText(QCoreApplication::translate("MainWindow", "donner le nom du consultant:", nullptr));
@@ -1981,6 +2585,52 @@ public:
         QJOUTERCONSULTQNTBUTTON->setText(QCoreApplication::translate("MainWindow", "ajouter ", nullptr));
         pushButton_14->setText(QCoreApplication::translate("MainWindow", "annuler", nullptr));
         label_83->setText(QCoreApplication::translate("MainWindow", "date", nullptr));
+        gestion_reclamation->setTitle(QString());
+        groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "ajouter r\303\251clammations", nullptr));
+        priorite_reclamation->setItemText(0, QCoreApplication::translate("MainWindow", "haute", nullptr));
+        priorite_reclamation->setItemText(1, QCoreApplication::translate("MainWindow", "moyenne", nullptr));
+        priorite_reclamation->setItemText(2, QCoreApplication::translate("MainWindow", "basse", nullptr));
+
+        label_12->setText(QCoreApplication::translate("MainWindow", "Priorit\303\251 :", nullptr));
+        bt_ajouter_reclamation->setText(QCoreApplication::translate("MainWindow", "Ajouter", nullptr));
+        label_13->setText(QCoreApplication::translate("MainWindow", "Date  :", nullptr));
+        label_14->setText(QCoreApplication::translate("MainWindow", "Id r\303\251clammation :", nullptr));
+        id_reclamation->setText(QString());
+        label_16->setText(QCoreApplication::translate("MainWindow", "description", nullptr));
+        description_reclamation->setText(QString());
+        label_17->setText(QCoreApplication::translate("MainWindow", "r\303\251solution :", nullptr));
+        bt_modifier_reclamation->setText(QCoreApplication::translate("MainWindow", "modifier", nullptr));
+        label_18->setText(QCoreApplication::translate("MainWindow", "Etat :", nullptr));
+        etat_reclamation->setItemText(0, QCoreApplication::translate("MainWindow", "Traiter", nullptr));
+        etat_reclamation->setItemText(1, QCoreApplication::translate("MainWindow", "En cour", nullptr));
+        etat_reclamation->setItemText(2, QCoreApplication::translate("MainWindow", "annuler", nullptr));
+
+        label_19->setText(QCoreApplication::translate("MainWindow", "id client:", nullptr));
+        label_pic_2->setText(QString());
+        groupBox_7->setTitle(QCoreApplication::translate("MainWindow", "r\303\251clammations", nullptr));
+        pushButton_9->setText(QCoreApplication::translate("MainWindow", "Export to PDF", nullptr));
+        bt_supprimier_reclamation->setText(QCoreApplication::translate("MainWindow", "Supprimer ", nullptr));
+        label_20->setText(QCoreApplication::translate("MainWindow", "chatbot IA :", nullptr));
+        lineEdit_envoyer_chatbot->setPlaceholderText(QCoreApplication::translate("MainWindow", "parler avec moi", nullptr));
+        bt_generate->setText(QCoreApplication::translate("MainWindow", "generate", nullptr));
+        chercher_text->setText(QString());
+        label_21->setText(QCoreApplication::translate("MainWindow", "rechercher :", nullptr));
+        bt_trier->setText(QCoreApplication::translate("MainWindow", "Trier", nullptr));
+        comboBox_ordre->setItemText(0, QCoreApplication::translate("MainWindow", "ASC", nullptr));
+        comboBox_ordre->setItemText(1, QCoreApplication::translate("MainWindow", "DESC", nullptr));
+
+        comboBox_choix->setItemText(0, QCoreApplication::translate("MainWindow", "Selectionner choix", nullptr));
+        comboBox_choix->setItemText(1, QCoreApplication::translate("MainWindow", "ID_RECLAMATION", nullptr));
+        comboBox_choix->setItemText(2, QCoreApplication::translate("MainWindow", "DESCRIPTION", nullptr));
+        comboBox_choix->setItemText(3, QCoreApplication::translate("MainWindow", "RESOLUTION", nullptr));
+        comboBox_choix->setItemText(4, QCoreApplication::translate("MainWindow", "ORDRE_PRIORITE", nullptr));
+        comboBox_choix->setItemText(5, QCoreApplication::translate("MainWindow", "DATE_DE_RECLAMATION", nullptr));
+        comboBox_choix->setItemText(6, QCoreApplication::translate("MainWindow", "ETAT", nullptr));
+
+        reclamation_go_to_menu->setText(QCoreApplication::translate("MainWindow", "Menu", nullptr));
+        tabWidget_3->setTabText(tabWidget_3->indexOf(Projects_2), QCoreApplication::translate("MainWindow", "Tab 1", nullptr));
+        label_stat->setText(QString());
+        tabWidget_3->setTabText(tabWidget_3->indexOf(tab_6), QCoreApplication::translate("MainWindow", "Stat", nullptr));
     } // retranslateUi
 
 };

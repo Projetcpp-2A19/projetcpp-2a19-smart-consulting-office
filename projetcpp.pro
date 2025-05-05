@@ -35,6 +35,7 @@ SOURCES += \
         mainwindow.cpp \
     connection.cpp \
     projet.cpp \
+    reclamation.cpp \
     sms.cpp \
     smtpclient.cpp
 
@@ -46,6 +47,7 @@ HEADERS += \
         mainwindow.h \
     connection.h \
     projet.h \
+    reclamation.h \
     sms.h \
     smtpclient.h
 

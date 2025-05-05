@@ -145,6 +145,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget_4->setCurrentIndex(1);
     ui->gestion_client->hide();
     ui->gestion_consultant->hide();
+    ui->gestion_reclamation->hide();
     temperatureTimer = new QTimer(this);
     connect(temperatureTimer, &QTimer::timeout, this, &MainWindow::updateTemperature);
 
@@ -379,7 +380,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QSqlQuery createTableQuery;
     createTableQuery.exec("CREATE TABLE PROJET ("
                           "ID_PROJET NUMBER PRIMARY KEY,"
-                          "TEMPERATURE NUMBER(5,2) DEFAULT 20.0"
+                          "TEMP_THRESHOLD NUMBER(5,2) DEFAULT 20.0"
                           ")");
 
     // Insérer une valeur par défaut si la table est vide
@@ -387,7 +388,7 @@ MainWindow::MainWindow(QWidget *parent) :
     checkEmptyQuery.exec("SELECT COUNT(*) FROM PROJET");
     if (checkEmptyQuery.next() && checkEmptyQuery.value(0).toInt() == 0) {
         QSqlQuery insertDefaultQuery;
-        insertDefaultQuery.exec("INSERT INTO PROJET (ID_PROJET, TEMPERATURE) VALUES (58, 20.0)");
+        insertDefaultQuery.exec("INSERT INTO PROJET (ID_PROJET, TEMP_THRESHOLD) VALUES (58, 20.0)");
     }
 
     // Initialize Arduino connection
@@ -406,7 +407,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Charger la température actuelle
     QSqlQuery query;
-    query.prepare("SELECT TEMPERATURE FROM PROJET WHERE ID_PROJET = 58");
+    query.prepare("SELECT TEMP_THRESHOLD FROM PROJET WHERE ID_PROJET = 58");
     if (query.exec() && query.next()) {
         float temp = query.value(0).toFloat();
         ui->temperatureLineEdit->setText(QString::number(temp, 'f', 1));
@@ -425,7 +426,7 @@ MainWindow::MainWindow(QWidget *parent) :
             this, &MainWindow::on_searchConsultantByTyping);
 
     // Création du bouton historique
-    QPushButton* historiqueButton = new QPushButton("Historique des suppressions", this);
+    historiqueButton = new QPushButton("Historique des suppressions", this);
     historiqueButton->setObjectName("historiqueButton");
     historiqueButton->setGeometry(QRect(600, 500, 200, 30)); // Ajustez la position selon votre interface
     historiqueButton->setStyleSheet("QPushButton {"
@@ -442,11 +443,31 @@ MainWindow::MainWindow(QWidget *parent) :
                                     "background-color: #1c5985;"
                                     "}");
     connect(historiqueButton, &QPushButton::clicked, this, &MainWindow::on_historiqueButton_clicked);
+    historiqueButton->hide();
 
     ui->staticWidget->hide();
     ui->hidepushbutton->hide();
 
 
+
+
+
+    //gestion reclamation
+    ui->tableView_reclamation->setModel(r.afficher());
+
+
+    ui->date_reclamation->setDate(QDate::currentDate());
+
+    remplir_comboBox_id_reclamation();
+
+    QIntValidator *validator5 = new QIntValidator(0, 10000); // Range from 0 to 99999
+    ui->id_reclamation->setValidator(validator5); // Set the validator to the QLineEdit
+
+    remplir_comboBox_id_client();
+
+    statistique_reclamation();
+
+    setupTrayIcon();
 
 }
 
@@ -3898,7 +3919,7 @@ void MainWindow::on_tempButton_clicked()
 
     // Mettre à jour la base de données
     QSqlQuery query;
-    query.prepare("UPDATE PROJET SET TEMPERATURE = :temp WHERE ID_PROJET = 58");
+    query.prepare("UPDATE PROJET SET TEMP_THRESHOLD = :temp WHERE ID_PROJET = 58");
     query.bindValue(":temp", newTemp);
 
     if (query.exec()) {
@@ -3928,7 +3949,7 @@ void MainWindow::on_temperatureLineEdit_editingFinished()
 
     // Mettre à jour la température dans la base de données
     QSqlQuery query;
-    query.prepare("UPDATE PROJET SET TEMPERATURE = :temp WHERE ID_PROJET = 58");
+    query.prepare("UPDATE PROJET SET TEMP_THRESHOLD = :temp WHERE ID_PROJET = 58");
     query.bindValue(":temp", temperature);
 
     if (query.exec()) {
@@ -3977,7 +3998,7 @@ void MainWindow::on_temperatureLineEdit_editingFinished()
 void MainWindow::checkTemperature()
 {
     QSqlQuery query;
-    query.prepare("SELECT TEMPERATURE FROM PROJET WHERE ID_PROJET = 58");
+    query.prepare("SELECT TEMP_THRESHOLD FROM PROJET WHERE ID_PROJET = 58");
     if (query.exec() && query.next()) {
         float temperature = query.value(0).toFloat();
 
@@ -4015,6 +4036,8 @@ void MainWindow::on_menu_consultant_clicked()
 {
     ui->gestion_consultant->show();
     ui->menu->hide();
+    historiqueButton->show();
+
 }
 
 
@@ -4022,5 +4045,554 @@ void MainWindow::on_consultant_go_to_menu_clicked()
 {
     ui->gestion_consultant->hide();
     ui->menu->show();
+    historiqueButton->hide();
+
+}
+
+
+
+
+
+
+
+
+
+void MainWindow::remplir_comboBox_id_reclamation()
+{
+    ui->id_supprimer_reclamation->clear();
+
+    QSqlQuery query;
+    query.prepare("SELECT ID_RECLAMATION FROM RECLAMATION");
+
+    // Execute the query
+    if (query.exec()) {
+        // Fetch the results
+        while (query.next()) {
+            QString id = query.value(0).toString();
+            ui->id_supprimer_reclamation->addItem(id);
+        }
+    }
+}
+
+
+
+
+
+void MainWindow::remplir_comboBox_id_client()
+{
+    ui->nom_client_reclamation->clear();
+
+    QSqlQuery query;
+    query.prepare("SELECT IDCLIENT FROM CLIENTS");
+
+    // Execute the query
+    if (query.exec()) {
+        // Fetch the results
+        while (query.next()) {
+            QString id = query.value(0).toString();
+            ui->nom_client_reclamation->addItem(id);
+        }
+    }
+}
+
+
+
+void MainWindow::on_reclamation_go_to_menu_clicked()
+{
+    ui->gestion_reclamation->hide();
+    ui->menu->show();
+
+}
+
+
+void MainWindow::on_menu_reclamation_clicked()
+{
+    ui->gestion_reclamation->show();
+    ui->menu->hide();
+}
+
+
+
+
+
+
+
+void MainWindow::on_menu_projet_clicked()
+{
+    ui->menu->hide();
+    ui->gestion_projet->show();
+}
+
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    {
+        QString strStream;
+        QTextStream out(&strStream);
+
+        const int rowCount = ui->tableView_reclamation->model()->rowCount();
+        const int columnCount = ui->tableView_reclamation->model()->columnCount();
+
+        out << "<html>\n"
+               "<head>\n"
+               "<meta Content=\"Text/html; charset=Windows-1251\">\n"
+               "<title>%1</title>\n"
+               "<style>\n"
+               "table {\n"
+               "    width: 100%;\n"
+               "    border-collapse: collapse;\n"
+               "}\n"
+               "th, td {\n"
+               "    padding: 8px;\n"
+               "    text-align: left;\n"
+               "    border-bottom: 1px solid #ddd;\n"
+               "}\n"
+               "tr:nth-child(even) {\n"
+               "    background-color: #f2f2f2;\n"
+               "}\n"
+               "</style>\n"
+               "</head>\n"
+               "<body bgcolor=#ffffff link=#5000A0>\n"
+               "<center> <H1>Liste des reclamations</H1></center><br/><br/>\n"
+               "<img src=\"path/to/your/image.jpg\" alt=\"Description of image\" style=\"max-width: 100%; height: auto;\">\n"
+               "<table>\n";
+
+        // headers
+        out << "<thead><tr bgcolor=#f0f0f0> <th>Numero</th>";
+        for (int column = 0; column < columnCount; column++)
+        {
+            if (!ui->tableView_reclamation->isColumnHidden(column))
+            {
+                out << QString("<th>%1</th>").arg(ui->tableView_reclamation->model()->headerData(column, Qt::Horizontal).toString());
+            }
+        }
+        out << "</tr></thead>\n";
+
+        // data table
+        for (int row = 0; row < rowCount; row++)
+        {
+            out << "<tr> <td>" << row + 1 << "</td>";
+            for (int column = 0; column < columnCount; column++)
+            {
+                if (!ui->tableView_reclamation->isColumnHidden(column))
+                {
+                    QString data = ui->tableView_reclamation->model()->data(ui->tableView_reclamation->model()->index(row, column)).toString().simplified();
+                    out << QString("<td>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
+                }
+            }
+            out << "</tr>\n";
+        }
+
+
+
+        QString fileName = QFileDialog::getSaveFileName((QWidget *)0, "Sauvegarder en PDF", QString(), "*.pdf");
+        if (QFileInfo(fileName).suffix().isEmpty())
+        {
+            fileName.append(".pdf");
+        }
+
+        QPrinter printer(QPrinter::PrinterResolution);
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setPageSize(QPageSize::A4);
+        printer.setOutputFileName(fileName);
+
+        QTextDocument doc;
+        doc.setHtml(strStream);
+        doc.print(&printer);
+
+    }
+
+}
+
+
+void MainWindow::setupTrayIcon() {
+
+    trayIconMenu = new QMenu(this);
+
+
+    QAction *quitAction = new QAction("Quitter", this);
+    connect(quitAction, &QAction::triggered, this, &QWidget::close);
+    trayIconMenu->addAction(quitAction);
+
+
+    trayIcon = new QSystemTrayIcon(this);
+
+
+    trayIcon->setIcon(QIcon("/Users/salim/Downloads/6.PNG.png"));
+    trayIcon->setContextMenu(trayIconMenu);
+
+
+    trayIcon->show();
+}
+void MainWindow::showNotification(const QString &title, const QString &message)
+{
+    // Vérifier si l'icône du tray est activée et afficher la notification
+    if (trayIcon->isVisible()) {
+        trayIcon->showMessage(title, message, QSystemTrayIcon::Information, 5000);  // Durée en ms
+    }
+}
+
+
+void MainWindow::statistique_reclamation()
+{
+    QList<QWidget*> childWidgets = ui->label_stat->findChildren<QWidget*>();
+    for (QWidget* childWidget : childWidgets) {
+        childWidget->deleteLater();
+
+    }
+    //the clear didnt work, but my goal is when i second click this button it deleted old chart and renders a new one
+    ui->label_stat->clear();
+    ui->label_stat->hide();
+
+    int s0, s1,s2;
+
+    s0 = r.countPriorite("haute");
+    s1 = r.countPriorite("moyenne");
+    s2 = r.countPriorite("basse");
+
+
+
+
+
+    int total = s0 + s1  +s2 ;
+    // Calculate percentages
+    float x,x1,x2;
+    if(total!=0)
+    {
+        x=(s0 * 100.0f) / total;
+        x1=(s1 * 100.0f) / total;
+        x2=(s2 * 100.0f) / total;
+    }
+    else
+    {
+        x=0.0f;
+        x1=0.0f;
+        x2=0.0f;
+
+    }
+
+    // Adjust the percentages to ensure they sum up to 100%
+    float totalPercentage = x + x1 +x2 ;
+    if (totalPercentage != 100.0f && total != 0) {
+        float correction = 100.0f - totalPercentage;
+        x += correction;  // Apply correction to one of the slices (usually the largest one)
+    }
+
+
+
+
+    // Haute  25.00 %
+    QString ch1 = QString("Haute %1 %").arg(QString::number(x, 'f', 2));
+    QString ch2 = QString("Moyenne %2 %").arg(QString::number(x1, 'f', 2));
+    QString ch3= QString("Basse %2 %").arg(QString::number(x2, 'f', 2));
+
+
+
+
+
+
+    QPieSeries *series=new QPieSeries();
+    series->setHoleSize(0.35);
+
+    QPieSlice *slice= series->append(ch1,x);
+    slice->setLabelVisible();
+    slice->setLabelColor(QColor(Qt::black));
+    slice->setBrush(QColor(Qt::blue));//changer
+
+    QPieSlice *slice1= series->append(ch2,x1);
+    slice1->setLabelVisible();
+    slice1->setLabelColor(QColor(Qt::black));
+    slice1->setBrush(QColor(Qt::black));//changer
+
+    QPieSlice *slice2= series->append(ch3,x2);
+    slice2->setLabelVisible();
+    slice2->setLabelColor(QColor(Qt::black));
+    slice2->setBrush(QColor(Qt::red));//changer
+
+
+    QChart *chart=new QChart();
+    chart->addSeries(series);
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    QBrush backgroundBrush(QColor(187,93,87,0));
+    chart->setBackgroundBrush(backgroundBrush);
+    QChartView *chartview=new QChartView(chart);
+    chartview->setRenderHint(QPainter::Antialiasing);
+    chartview->setFixedSize(ui->label_stat->size());
+    chartview->setParent(ui->label_stat);
+    ui->label_stat->setStyleSheet("background:transparent; color:white; ");
+    ui->label_stat->show();
+
+}
+
+
+void MainWindow::on_chercher_text_textChanged(const QString &text)
+{
+    QString choix=ui->comboBox_choix->currentText();
+
+    if(choix=="Selectionner choix")
+    {
+        QMessageBox::warning(nullptr, QObject::tr(""),
+                             QObject::tr("tu dois choisir une choix"), QMessageBox::Cancel);
+        return;
+    }
+
+    ui->tableView_reclamation->setModel(r.chercher(choix,text));
+
+
+}
+
+
+void MainWindow::on_bt_modifier_reclamation_clicked()
+{
+
+
+
+        //récupération des données
+
+    int id = ui->id_reclamation->text().toInt();
+    QString description=ui->description_reclamation->text();
+    QString resolution=ui->resolution_reclamation->text();
+    QString priorite=ui->priorite_reclamation->currentText();
+    QDate date=ui->date_reclamation->date();
+    QString etat=ui->etat_reclamation->currentText();
+    QString nom=ui->nom_client_reclamation->currentText();
+    int id_client=ui->nom_client_reclamation->currentText().toInt();
+
+    if(r.chercher_id_reclamation(id)==false)
+    {
+        QMessageBox::warning(nullptr, QObject::tr("Erreur"),
+                             QObject::tr("le id  n'existe pas"), QMessageBox::Cancel);
+        return;
+    }
+
+    if(ui->id_reclamation->text().isEmpty() || ui->description_reclamation->text().isEmpty() || ui->resolution_reclamation->text().isEmpty())
+    {
+        QMessageBox::warning(nullptr, QObject::tr("Erreur"),
+                             QObject::tr("Tu dois remplir tous les champs"), QMessageBox::Cancel);
+        return;
+    }
+
+
+    reclamation r(id,description,resolution,priorite,date,etat,id_client);
+
+
+    bool test =r.modifier();
+
+    if(test)
+    {
+        QMessageBox::information(nullptr, QObject::tr(""),
+                                 QObject::tr("modificiation avec succes"), QMessageBox::Cancel);
+        ui->tableView_reclamation->setModel(r.afficher());
+        ui->id_reclamation->setText("");
+        ui->description_reclamation->setText("");
+        ui->resolution_reclamation->setText("");
+        ui->date_reclamation->setDate(QDate::currentDate());
+        ui->priorite_reclamation->setCurrentIndex(0);
+        ui->etat_reclamation->setCurrentIndex(0);
+
+        remplir_comboBox_id_reclamation();
+        statistique_reclamation();
+
+    }
+    else
+    {
+        QMessageBox::information(nullptr, QObject::tr(""),
+                                 QObject::tr("modificiation echoué"), QMessageBox::Cancel);
+    }
+
+
+}
+
+void MainWindow::on_bt_supprimier_reclamation_clicked()
+{
+    {
+        int ID=ui->id_supprimer_reclamation->currentText().toInt();
+        bool test = r.supprimer(ID);
+        if(test)
+        {
+            QMessageBox::information(nullptr, QObject::tr(""),
+                                     QObject::tr("suppression avec succes"), QMessageBox::Cancel);
+
+            remplir_comboBox_id_reclamation();
+            ui->tableView_reclamation->setModel(r.afficher());
+            statistique_reclamation();
+
+        }
+        else
+        {
+            QMessageBox::information(nullptr, QObject::tr(""),
+                                     QObject::tr("echou de suprression"), QMessageBox::Cancel);
+        }
+    }
+
+
+}
+
+
+void MainWindow::on_bt_ajouter_reclamation_clicked()
+{
+
+        //récupération des données
+
+    int id = ui->id_reclamation->text().toInt();
+    QString description=ui->description_reclamation->text();
+    QString resolution=ui->resolution_reclamation->text();
+    QString priorite=ui->priorite_reclamation->currentText();
+    QDate date=ui->date_reclamation->date();
+    QString etat=ui->etat_reclamation->currentText();
+    QString nom=ui->nom_client_reclamation->currentText();
+    int id_client=ui->nom_client_reclamation->currentText().toInt();
+
+
+    if(r.chercher_id_reclamation(id)==true)
+    {
+        QMessageBox::warning(nullptr, QObject::tr("Erreur"),
+                             QObject::tr("le id deja existe"), QMessageBox::Cancel);
+        return;
+    }
+
+    if(ui->id_reclamation->text().isEmpty() || ui->description_reclamation->text().isEmpty() || ui->resolution_reclamation->text().isEmpty())
+    {
+        QMessageBox::warning(nullptr, QObject::tr("Erreur"),
+                             QObject::tr("Tu dois remplir tous les champs"), QMessageBox::Cancel);
+        return;
+    }
+
+
+    reclamation r(id,description,resolution,priorite,date,etat,id_client);
+
+
+    bool test =r.ajouter();
+
+    if(test)
+    {
+        QMessageBox::information(nullptr, QObject::tr(""),
+                                 QObject::tr("ajout avec succes"), QMessageBox::Cancel);
+        ui->tableView_reclamation->setModel(r.afficher());
+
+        QString message="Description: "+description+ "\n"
+                          +"Resolution: "+resolution+
+                          "\n Priorite:" +priorite;
+        showNotification("notification",message);
+
+
+        ui->id_reclamation->setText("");
+        ui->description_reclamation->setText("");
+        ui->resolution_reclamation->setText("");
+        ui->date_reclamation->setDate(QDate::currentDate());
+        ui->priorite_reclamation->setCurrentIndex(0);
+        ui->etat_reclamation->setCurrentIndex(0);
+
+        remplir_comboBox_id_reclamation();
+
+        statistique_reclamation();
+
+    }
+
+
+}
+
+
+void MainWindow::on_tableView_reclamation_clicked(const QModelIndex &index)
+{
+    {
+
+        QAbstractItemModel* model = ui->tableView_reclamation->model();
+
+        int row = index.row();
+        QString ID=model->data(model->index(row,0)).toString();
+        QString Description=model->data(model->index(row,1)).toString();
+        QString RESOLUTION=model->data(model->index(row,2)).toString();
+        QString Priorite=model->data(model->index(row,3)).toString();
+        QDate date=model->data(model->index(row,4)).toDate();
+        QString etat=model->data(model->index(row,5)).toString();
+        QString id_client=model->data(model->index(row,6)).toString();
+
+        ui->id_reclamation->setText(ID);
+        ui->description_reclamation->setText(Description);
+        ui->resolution_reclamation->setText(RESOLUTION);
+        ui->date_reclamation->setDate(date);
+        ui->priorite_reclamation->setCurrentText(Priorite);
+        ui->etat_reclamation->setCurrentText(etat);
+        ui->nom_client_reclamation->setCurrentText(id_client);
+
+    }
+}
+
+
+void MainWindow::on_bt_trier_clicked()
+{
+    {
+        QString choix=ui->comboBox_choix->currentText();
+        QString ordre=ui->comboBox_ordre->currentText();
+
+        if(choix=="Selectionner choix")
+        {
+            QMessageBox::warning(nullptr, QObject::tr(""),
+                                 QObject::tr("tu dois choisir une choix"), QMessageBox::Cancel);
+            return;
+        }
+
+        ui->tableView_reclamation->setModel(r.trier(choix,ordre));
+
+
+    }
+}
+
+
+
+
+void MainWindow::on_bt_generate_clicked()
+{
+    {
+        QString userMessage = ui->lineEdit_envoyer_chatbot->text();
+
+        ui->textEdit_text_chat->append("<b style='color:blue'>User</b>: " + userMessage);
+
+        ui->lineEdit_envoyer_chatbot->clear();
+
+        QString apiKey = "5a14410dfamshc850f71f2b7babfp12e2f2jsn94a190645e2c";
+        QString endpoint = "https://chatgpt-api8.p.rapidapi.com/";
+
+        QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+
+        QNetworkRequest request;
+        request.setUrl(QUrl(endpoint));
+        request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+        request.setRawHeader("X-RapidAPI-Key", apiKey.toUtf8());
+        request.setRawHeader("X-RapidAPI-Host", "chatgpt-api8.p.rapidapi.com");
+
+        QJsonArray messagesArray;
+        QJsonObject userMessageObject;
+        userMessageObject["content"] = userMessage;
+        userMessageObject["role"] = "user";
+        messagesArray.append(userMessageObject);
+        QJsonDocument doc(messagesArray);
+        QByteArray postData = doc.toJson();
+
+        QNetworkReply *reply = manager->post(request, postData);
+
+        connect(reply, &QNetworkReply::finished, [=]() {
+            if (reply->error() == QNetworkReply::NoError) {
+                QByteArray responseData = reply->readAll();
+                qDebug() << responseData;
+
+                QJsonDocument jsonResponse = QJsonDocument::fromJson(responseData);
+                QJsonObject responseObject = jsonResponse.object();
+
+                if (responseObject.contains("text")) {
+                    QString botResponse = responseObject["text"].toString();
+                    ui->textEdit_text_chat->append("<b style='color:green'>ChatGPT</b>: " + botResponse);
+                } else {
+                    ui->textEdit_text_chat->append("<b style='color:red'>Error</b>: Invalid response format, missing 'text' field");
+                }
+            } else {
+                ui->textEdit_text_chat->append("<b style='color:red'>Error</b>: " + reply->errorString());
+            }
+        });
+
+    }
+
 }
 

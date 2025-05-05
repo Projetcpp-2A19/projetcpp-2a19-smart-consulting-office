@@ -160,17 +160,20 @@ QSqlQueryModel* Client::afficher()
 
 QSqlQueryModel* Client::rechercherEmail(const QString &email)
 {
-    // On filtre sur la colonne email avec un LIKE
     QSqlQueryModel* model = new QSqlQueryModel();
     QSqlQuery query;
     query.prepare("SELECT idClient, nom, prenom, email, cin, adresse, typeClient, numeroTelephone "
                   "FROM Clients "
                   "WHERE email LIKE :email");
-    query.bindValue(":email", "'%" + email + "%'");
+    query.bindValue(":email", "%" + email + "%");  // Removed the extra single quotes
+
     if (!query.exec()) {
         qDebug() << "Erreur lors de la recherche par email :" << query.lastError().text();
+        delete model;  // Clean up if query fails
+        return nullptr;
     }
 
+    model->setQuery(query);
 
     // Redéfinir les en-têtes
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));

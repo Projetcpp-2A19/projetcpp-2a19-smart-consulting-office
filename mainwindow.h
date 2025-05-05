@@ -23,7 +23,9 @@
 #include <QGraphicsLineItem>
 #include "arduino.h"
 
-
+#include <QMessageBox>
+#include <QDebug>
+#include <QSystemTrayIcon>
 
 #include  <QSqlTableModel>
 #include  <QSortFilterProxyModel>
@@ -44,6 +46,7 @@
 #include <QSqlDatabase>
 
 #include "consultant.h"
+#include <reclamation.h>
 
 #include <QRandomGenerator>
 namespace Ui {
@@ -184,10 +187,46 @@ void on_menu_employe_clicked();
 
     void on_consultant_go_to_menu_clicked();
 
+    void on_reclamation_go_to_menu_clicked();
+
+    void on_menu_reclamation_clicked();
+
+
+    void on_menu_projet_clicked();
+
+    void on_pushButton_9_clicked();
+
+
+    void on_chercher_text_textChanged(const QString &arg1);
+
+    void on_bt_modifier_reclamation_clicked();
+
+    void on_bt_supprimier_reclamation_clicked();
+
+    void on_bt_ajouter_reclamation_clicked();
+
+    void on_tableView_reclamation_clicked(const QModelIndex &index);
+
+    void on_bt_trier_clicked();
+
+    void on_bt_generate_clicked();
+
 private:
     void initializeConsultantTableModel() ;
     void afficherHistorique();
 
+//Gestion reclamation
+
+    void remplir_comboBox_id_reclamation();
+
+
+    void remplir_comboBox_id_client();
+
+    void setupTrayIcon();
+
+
+    void showNotification(const QString &title, const QString &message);
+    void statistique_reclamation();
 
 
 
@@ -261,6 +300,7 @@ private:
      QString serialbuffer;
 
      //gestion consultant
+     QPushButton* historiqueButton;
      QSqlQueryModel *consultantModel;
      QSqlTableModel*consultantTableModel;
     // QTimer *temperatureTimer;
@@ -271,6 +311,10 @@ private:
      //Arduino arduino;
 
 
+     //gestion reclamation
+         reclamation r;
+     QSystemTrayIcon *trayIcon;
+     QMenu *trayIconMenu;
 };
 
 #endif // MAINWINDOW_H
