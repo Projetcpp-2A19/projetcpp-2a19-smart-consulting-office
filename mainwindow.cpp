@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "ui_mainwindow.h"
 #include "client.h"
 #include <QComboBox>
 #include <QFileDialog>
@@ -16,6 +16,14 @@
 #include <QtCharts/QChart>
 #include <QProcess>
 #include <QDir>
+#include <QDateTime>
+#include <QChart>
+#include <QPieSeries>
+#include <QChartView>
+#include<QtDebug>
+#include <QSqlRecord>
+#include <QSqlError>
+#include <QSqlQuery>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -68,7 +76,33 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableViewClients->setSelectionMode(QAbstractItemView::SingleSelection);
 
     ui->tableViewClients->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    /////////////:arduino
+    ///
+    serialbuffer="";
+    QString portName;
+       foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+           if (info.portName() == "COM9") {
+               portName = info.portName();
+               break;
+           }
+       }
 
+       if (portName.isEmpty()) {
+           qDebug() << "COM9 not found.";
+       }
+          serialPort = new QSerialPort(portName);
+          serialPort->setBaudRate(QSerialPort::Baud9600);
+          serialPort->setDataBits(QSerialPort::Data8);
+          serialPort->setParity(QSerialPort::NoParity);
+          serialPort->setStopBits(QSerialPort::OneStop);
+         connect(serialPort, &QSerialPort::readyRead, this, &MainWindow::readarduino);
+          // Open the serial port
+          if (!serialPort->open(QIODevice::ReadWrite)) {
+              qDebug() << "Failed to open the serial port.";
+              delete serialPort;
+
+          }
+    ///////////////////
 
 }
 
@@ -78,27 +112,53 @@ MainWindow::~MainWindow()
 }
 void MainWindow::on_pushButton_addClient_clicked()
 {
-    // Récupérer les champs
-    QString nom = ui->lineEdit_nomCliet->text();
-    QString prenom = ui->lineEdit_prenomClient->text();
-    QString email = ui->lineEdit_emailClient->text();
-    QString cin = ui->lineEdit_cinClient->text();
-    QString adresse = ui->lineEdit_adresseClient->text();
+    // Récupérer et nettoyer les valeurs saisies (trimmed pour éliminer les espaces en début/fin)
+    QString nom = ui->lineEdit_nomCliet->text().trimmed();
+    QString prenom = ui->lineEdit_prenomClient->text().trimmed();
+    QString email = ui->lineEdit_emailClient->text().trimmed();
+    QString cin = ui->lineEdit_cinClient->text().trimmed();
+    QString adresse = ui->lineEdit_adresseClient->text().trimmed();
     QString typeClient = ui->comboBox_typeClient->currentText();
-    QString numeroTelephone = ui->lineEdit_numClient->text();
+    QString numeroTelephone = ui->lineEdit_numClient->text().trimmed();
 
-    // Vérifier que "nom" et "prénom" ne sont pas vides
-    if (nom.isEmpty()) {
-        QMessageBox::warning(this, "Erreur", "Le champ Nom ne peut être vide.");
+    QRegularExpression regexNom("^[A-Za-zÀ-ÖØ-öø-ÿ]+$"); // Accepte seulement des lettres, y compris accents
+    QRegularExpressionMatch matchNom = regexNom.match(nom);
+
+    if (nom.isEmpty() || nom.length() < 3 || !matchNom.hasMatch()) {
+        QMessageBox::warning(this, "Erreur", "Le champ Nom doit contenir au moins 3 caractères alphabétiques.");
         return;
     }
-    if (prenom.isEmpty()) {
-        QMessageBox::warning(this, "Erreur", "Le champ Prénom ne peut être vide.");
+    QRegularExpression regexPrenom("^[A-Za-zÀ-ÖØ-öø-ÿ]+$"); // Accepte uniquement les lettres
+    QRegularExpressionMatch matchPrenom = regexPrenom.match(prenom);
+
+    if (prenom.isEmpty() || prenom.length() < 3 || !matchPrenom.hasMatch()) {
+        QMessageBox::warning(this, "Erreur", "Le champ Prénom doit contenir au moins 3 caractères alphabétiques.");
+        return;
+    }
+
+    QRegularExpression regexEmail("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
+    QRegularExpressionMatch matchEmail = regexEmail.match(email);
+    if (!matchEmail.hasMatch()) {
+        QMessageBox::warning(this, "Erreur", "Adresse email invalide.");
+        return;
+    }
+
+    QRegularExpression regexPhone("^[0-9]{8,}$");
+    QRegularExpressionMatch matchPhone = regexPhone.match(numeroTelephone);
+    if (!matchPhone.hasMatch()) {
+        QMessageBox::warning(this, "Erreur", "Le numéro de téléphone doit comporter au moins 8 chiffres et ne contenir aucun espace.");
+        return;
+    }
+
+
+    QRegularExpression regexCin("^[0-9]+$");
+    QRegularExpressionMatch matchCin = regexCin.match(cin);
+    if (!matchCin.hasMatch()) {
+        QMessageBox::warning(this, "Erreur", "Le champ CIN doit contenir uniquement des chiffres.");
         return;
     }
 
     if (ui->pushButton_addClient->text() == "Modifier" && m_currentClientId != -1) {
-        // Mode modification
         Client c;
         if (c.modifier(m_currentClientId, nom, prenom, email, cin, adresse, typeClient, numeroTelephone)) {
             QMessageBox::information(this, "Succès", "Client modifié avec succès.");
@@ -106,12 +166,10 @@ void MainWindow::on_pushButton_addClient_clicked()
             QMessageBox::critical(this, "Erreur", "La modification du client a échoué.");
             return;
         }
-        // Réinitialiser le mode modification
         m_editMode = false;
         m_currentClientId = -1;
         ui->pushButton_addClient->setText("Ajouter");
     } else {
-        // Mode ajout
         Client client(nom, prenom, email, cin, adresse, typeClient, numeroTelephone);
         if (client.ajouter()) {
             QMessageBox::information(this, "Succès", "Client ajouté avec succès !");
@@ -121,13 +179,13 @@ void MainWindow::on_pushButton_addClient_clicked()
         }
     }
 
-    // Actualiser la liste
+    // Actualiser la liste des clients
     Client c;
     QSqlQueryModel* model = c.afficher();
     ui->tableViewClients->setModel(model);
     ui->tableViewClients->setColumnHidden(0, true);
 
-    // Réinitialiser le formulaire après l'opération
+    // Réinitialiser le formulaire
     ui->lineEdit_nomCliet->clear();
     ui->lineEdit_prenomClient->clear();
     ui->lineEdit_emailClient->clear();
@@ -136,7 +194,6 @@ void MainWindow::on_pushButton_addClient_clicked()
     ui->comboBox_typeClient->setCurrentIndex(0);
     ui->lineEdit_numClient->clear();
 
-    // Basculer sur l'onglet "Afficher Client" (index 1)
     ui->tabWidget->setCurrentIndex(1);
 }
 
@@ -546,4 +603,53 @@ void MainWindow::on_pushButton_backup_clicked()
         QMessageBox::critical(this, "Erreur",
                               "Échec du backup.\n\nSortie : " + QString(err));
     }
+}
+
+
+
+void MainWindow::readarduino()
+{
+    QByteArray data = serialPort->readAll();
+    serialbuffer += QString::fromUtf8(data);
+
+    int endOfLineIndex;
+    while ((endOfLineIndex = serialbuffer.indexOf('\n')) != -1) {
+        QString line = serialbuffer.left(endOfLineIndex).trimmed(); // Clean line
+        serialbuffer = serialbuffer.mid(endOfLineIndex + 1);
+
+        if (!line.isEmpty()) {
+            qDebug() << "Received RFID UID:" << line;
+
+            // Check in database using 'cin'
+            QSqlQuery query;
+            query.prepare("SELECT nom, prenom FROM Clients WHERE cin = :cin");
+            query.bindValue(":cin", line);
+
+            if (query.exec()) {
+                if (query.next()) {
+                    QString nom = query.value("nom").toString();
+                    QString prenom = query.value("prenom").toString();
+
+                    QString message = "Welcome " + nom + " " + prenom;
+
+                    // Show popup
+                    QMessageBox::information(this, "Access Granted", message);
+
+                    // Send message back to Arduino
+                    QByteArray toSend = message.toUtf8() + '\n';
+                    serialPort->write(toSend);
+                    qDebug() << "Sent to Arduino:" << toSend;
+                } else {
+                    QString message = "CIN not found";
+                    QMessageBox::warning(this, "Access Denied", message);
+                    serialPort->write((message + '\n').toUtf8());
+                }
+            } else {
+                qDebug() << "Query failed:" << query.lastError().text();
+            }
+        }
+    }
+
+
+
 }
